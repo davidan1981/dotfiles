@@ -1,0 +1,282 @@
+#
+#  ________  ________  ___      ___ ___  ________  ________      
+# |\   ___ \|\   __  \|\  \    /  /|\  \|\   ___ \|\   ____\     
+# \ \  \_|\ \ \  \|\  \ \  \  /  / | \  \ \  \_|\ \ \  \___|_    
+#  \ \  \ \\ \ \   __  \ \  \/  / / \ \  \ \  \ \\ \ \_____  \   
+#   \ \  \_\\ \ \  \ \  \ \    / /   \ \  \ \  \_\\ \|____|\  \  
+#    \ \_______\ \__\ \__\ \__/ /     \ \__\ \_______\____\_\  \ 
+#     \|_______|\|__|\|__|\|__|/       \|__|\|_______|\_________\
+#                                                    \|_________|
+#  ________ ___      ___ ___       __   _____ ______             
+# |\  _____\\  \    /  /|\  \     |\  \|\   _ \  _   \           
+# \ \  \__/\ \  \  /  / | \  \    \ \  \ \  \\\__\ \  \          
+#  \ \   __\\ \  \/  / / \ \  \  __\ \  \ \  \\|__| \  \         
+#   \ \  \_| \ \    / /   \ \  \|\__\_\  \ \  \    \ \  \        
+#    \ \__\   \ \__/ /     \ \____________\ \__\    \ \__\       
+#     \|__|    \|__|/       \|____________|\|__|     \|__|       
+#                                                           
+#
+
+###############################
+# Set environment variables
+###############################
+SetEnv fvwm_imgs $[FVWM_USERDIR]/images
+SetEnv fvwm_icons $[FVWM_USERDIR]/icons
+SetEnv fvwm_48_icons /usr/share/icons/hicolor/48x48/apps
+SetEnv fvwm_32_icons /usr/share/icons/hicolor/32x32/apps
+SetEnv fvwm_pixmaps /usr/share/pixmaps/fvwm
+SetEnv fvwm_script $./scripts
+SetEnv fvwm_wallpapers $[FVWM_USERDIR]/wallpapers
+SetEnv fvwm_webbrowser /usr/bin/chromium-browswer
+SetEnv fvwm_term /usr/bin/urxvt
+
+#ModulePath /usr/local/depot/fvwm-2.0.45/lib/fvwm2
+ImagePath $[fvwm_icons]:$[fvwm_icons];.png:$[fvwm_icons];.jpg:$[fvwm_imgs]:$[fvwm_wallpapers]:$[fvwm_48_icons]:$[fvwm_32_icons]:$[fvwm_pixmaps]
+
+# ImagePath /usr/include/X11/pixmaps/:/usr/X11R6/icons/:/usr/include/X11/bitmaps/:/usr/local/icons/:/usr/share/pixmaps/fvwm/:/usr/share/icons/hicolor/48x48/apps/:/usr/share/pixmaps/:/usr/share/icons/hicolor/32x32/apps/
+
+#################
+# Default fonts
+#################
+# WindowFont     -adobe-helvetica-bold-r-*-14-*
+# IconFont
+
+###################################################
+# Desktop settings and shortcut keys to navigate
+###################################################
+DeskTopSize 2x2
+EdgeResistance 150 150
+EdgeScroll 100 100
+EdgeThickness 1
+
+Key Left     A        SC       FuncMoveWindowToPage -1p +0p
+Key Right    A        SC       FuncMoveWindowToPage +1p +0p
+Key Up       A        SC       FuncMoveWindowToPage +0p -1p
+Key Down     A        SC       FuncMoveWindowToPage +0p +1p
+
+Key Left     A        C        FuncGotoPage -1p +0p
+Key Right    A        C        FuncGotoPage +1p +0p
+Key Up       A        C        FuncGotoPage +0p -1p
+Key Down     A        C        FuncGotoPage +0p +1p
+
+DestroyFunc FuncMoveWindowToPage
+AddToFunc   FuncMoveWindowToPage
++ I MoveToPage $0 $1
++ I GotoPage $0 $1
+
+DestroyFunc FuncGotoPage
+AddToFunc   FuncGotoPage
++ I GotoPage $0 $1
++ I Next (CurrentPage, !Iconic, !Sticky, !Shaded, !Focused, !Overlapped) FuncSelectWindow
+
+DestroyFunc FuncSelectWindow
+AddToFunc   FuncSelectWindow
++ I Iconify off
++ I Focus
++ I Raise
+
+##############################
+# Global styles and options
+##############################
+HilightColor white #C71585
+Emulate Mwm
+MenuStyle Mwm
+SnapGrid 3 3
+Style "*"           MWMFunctions, MWMDecor
+Style "*"           DecorateTransient, NoPPosition
+Style "*"           FocusFollowsMouse, MouseFocusClickRaises
+Style "*"           ActivePlacement, RandomPlacement
+Style "*"           IconBox +100 +15 -15 -15, IconFill top left
+
+Style "Fvwm*"       NoTitle,  Sticky, WindowListSkip
+Style "Fvwm*"       CirculateSkipIcon, CirculateSkip
+Style "FvwmPager"   NoTitle, Sticky, WindowListSkip
+Style "FvwmButtons" NoTitle, Sticky, WindowListSkip
+Style "FvwmButtons" CirculateSkip
+Style "FvwmButtons" ClickToFocus
+
+Style "*clock"      NoTitle, NoHandles, Sticky, WindowListSkip
+Style "xbiff"       NoTitle, Sticky, WindowListSkip
+Style "xbuffy"      NoTitle, Sticky
+Style "xcalc"       RandomPlacement
+Style "xman"        RandomPlacement
+Style "xterm"       Icon xterm.xpm
+Style "urxvt"       Icon term.xpm
+
+######################  Menu Options  ########################
+# Valid Contexts...combinations of:
+# R=root window
+# W=application window
+# T=titlebar
+# S=side, top, or bottom bar
+# F=frame (corners)
+# I=icon window
+#
+# Valid Modifiers...any combination of:
+# N=no modifiers
+# C=control
+# S=shift
+# M=meta
+# L=caps lock
+# A=any modifier
+
+# This controls the colors of the menu you get when you click your mouse
+# on a background.  The menu options are defined later.
+ClickTime 750
+ColormapFocus FollowsMouse
+
+
+# main pop-up menus
+Mouse 1  R      A        Menu Fvwm2-Actions Nop
+Mouse 2  R      A        Menu Other-Logins Nop
+Mouse 3  R      A        Menu RootMenu Nop
+
+# title bar buttons
+Mouse 0  1      A        Menu Window-Ops Nop
+Mouse 0  2      A        Resize
+Mouse 0  4      A        Iconify
+
+# for when you click the edge of a window
+Mouse 1  FS     A        Resize-or-Raise
+Mouse 1  T      A        Move-or-Raise
+Mouse 1  I      A        Move-or-Iconify
+Mouse 2  I      A        Iconify
+Mouse 2  FST    A        Menu Window-Ops Nop
+Mouse 3  TSIF   A        RaiseLower
+
+# raise or lower window with alt-mousebutton1
+Mouse 1  W      M        Move-or-Raise
+
+########################Initialization Functions ############################
+# "Auto" is the autoraise delay time, in milliseconds.
+
+AddToFunc InitFunction    
++       "I" Module FvwmButtons
++       "I" Exec exec feh --bg-fill /home/rockalizer/Pictures/lillian_6month_indexed.jpg
+
+AddToFunc RestartFunction 
++       "I" Module FvwmButtons
++       "I" Exec exec feh --bg-fill /home/rockalizer/Pictures/lillian_6month_indexed.jpg
+
+##############  Defining Menu Options  #####################################
+AddToMenu Fvwm2-Actions  "Fvwm2 Actions"  Title   
++       "Refresh"  Exec  exec xrefresh &
++       ""    Nop
++       "Move"    Move-or-Raise2
++       ""    Nop
++       "Destroy"  Destroy
++       "Delete"  Delete   
++       ""    Nop
++       "Restart"   Restart /usr/local/bin/fvwm2
++       ""    Nop
++       "Quit"    Quit  
+
+AddToMenu RootMenu  "Root Menu"  Title      
++       "Applications" Popup Applications
++       "X Utilities" Popup XUtilities
++       ""    Nop
++       "Settings"   Exec  exec /usr/bin/unity-control-center &
++       ""    Nop
++       "Active Windows"  WindowList
+
+DestroyMenu XUtilities
+AddToMenu XUtilities "X Utilities" Title
++       "xcalc"      Exec  exec xcalc &
++       "Manual"     Exec  exec xman -notopbox -fn 9x15 &
+
+DestroyMenu Applications
+AddToMenu Applications "Applications" Title
++       "urxvt%mini.term.xpm%"      Exec  exec /usr/bin/urxvt &
++       "xterm%mini.xterm.xpm%"      Exec  exec /usr/bin/xterm &
++       "aterm%mini.term2.xpm%"      Exec  exec /usr/bin/aterm &
++       ""    Nop
++       "HipChat4"   Exec  exec /usr/local/bin/hipchat4 &
++       "Zoom"       Exec  exec /usr/bin/zoom &
++       "VirtualBox%mini.desktop.xpm%" Exec  exec /usr/bin/virtualbox &
++       ""    Nop
++       "Gimp%mini.gimp.xpm%"       Exec  exec /usr/bin/gimp &
+
+AddToMenu Window-Ops  "This Window"  Title
++       "Move"    Move
++       "Resize"  Resize
++       "Iconify"  Iconify
++       "Stick"    Stick
++       ""    Nop
++       "Delete"  Delete
++       "Close"    Close
++       "Destroy"  Destroy
+
+
+######################## Functions ########################################
+
+AddToFunc MailFunction     "I" Next [$0] Iconify -1
++               "I" Next [$0] focus
++         "I" None [$0] Exec $0 $1
+
+AddToFunc Move-or-Raise    "I" Raise
++        "M" Move
++          "D" Lower
+
+AddToFunc Move-or-Raise2  "M" Raise
++        "M" Move
++          "D" Lower
+
+AddToFunc Maximize-Func    "M" Maximize   0 100
++        "C" Maximize   0 80
++        "D" Maximize   100 100
+
+AddToFunc Move-or-Iconify  "I" Raise
++        "M" Move
++        "C" Iconify
+
+AddToFunc Resize-or-Raise  "I" Raise
++        "M" Resize
++        "D" Lower
+
+AddToFunc Resize-or-Raise2  "M" Raise
++        "M" Resize
++        "D" Lower
+
+AddToFunc PrintFunction    "I" Raise
++        "I" Exec xdpr -id $w
+
+AddToFunc Iconify-and-Raise     "I" Iconify
++                               "I" Raise
+
+*FvwmButtonsBack #c3c3c3 
+*FvwmButtonsFore black
+*FvwmButtonsFont -adobe-helvetica-bold-r-*-*-12-*-*-*-*-*-*-*
+*FvwmButtonsGeometry +0+0
+*FvwmButtonsColumns 1
+*FvwmButtonsBoxSize smart
+*FvwmButtons(Icon folder.xpm, Action 'Exec "rox-filer" rox-filer &')
+*FvwmButtons(Icon term.xpm, Action 'Exec "urxvt" urxvt &')
+*FvwmButtons(Icon xterm.xpm, Action 'Exec "xterm" xterm &')
+*FvwmButtons(Icon chromium-browser.png, Action 'Exec "chromium-browser" chromium-browser &')
+*FvwmButtons(Icon hipchat4.png, Action 'Exec "hipchat4" /usr/local/bin/hipchat4 &')
+*FvwmButtons(Icon darktable.png, Action 'Exec "darktable" /usr/bin/darktable &')
+*FvwmButtons(Icon screengrab.png, Action 'Exec "screengrab" screengrab &')
+*FvwmButtons(1x1 Swallow XClock 'Exec xclock -bg rgb:c3/c3/c3 &')
+*FvwmButtons(1x1 Swallow(UseOld) "FvwmPager" "Module FvwmPager 0 0")
+
+*FvwmPagerBack #C3C3C3
+*FvwmPagerRows 1
+*FvwmPager: SolidSeparators
+*FvwmPager: SmallFont "6x10"
+*FvwmPager: WindowLabelFormat ""
+
+*FvwmWinListFont -adobe-helvetica-bold-r-*-*-10-*-*-*-*-*-*-*
+*FvwmWinListAction Click1 Iconify -1,Focus
+*FvwmWinListAction Click2 Iconify
+*FvwmWinListAction Click3 Module "FvwmIdent" FvwmIdent
+*FvwmWinListUseSkipList
+*FvwmWinListGeometry +0-1
+
+*FvwmIconBox            "Fvwm*"         -
+
+# BorderStyle    Simple -- HiddenHandles Inset
+# TitleStyle    LeftJustified Height 24
+# MenuStyle   black #908090 #000000 -adobe-helvetica-bold-r-*-10-* mwm
+
+Key Escape  A  C  WindowList
+Key F1 A N Exec exec /usr/local/bin/xlock -mode dclock -mono -nice 10
