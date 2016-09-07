@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/davidan/Projects/Work/pychevron/bin'
+let g:netrw_dirhist_2='/Users/davidan/Projects/Work/lead-pages/.git'
+let g:netrw_dirhist_3='/Users/davidan/Projects/Personal/davidan42'
+let g:netrw_dirhist_4='/Users/davidan/Projects/Personal/stitchfultreasures-be'
+let g:netrw_dirhist_5='/Users/davidan/Projects/Personal/davidan2.0'
+let g:netrw_dirhist_6='/Users/davidan/Projects/Personal/random/.git'
