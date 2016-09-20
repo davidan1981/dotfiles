@@ -153,7 +153,7 @@ AddToMenu Fvwm2-Actions  "Fvwm2 Actions"  Title
 +       "Destroy%mini.destroy.xpm%"  Destroy
 +       "Delete%mini.delete.xpm%"    Delete   
 +       ""    Nop
-+       "Restart%mini.fvwm.xpm%"    Restart /usr/local/bin/fvwm2
++       "Restart%mini.fvwm.xpm%"     Restart /usr/local/bin/fvwm2
 +       ""    Nop
 +       ""    Nop
 +       "Quit%mini.exit.xpm%"        Quit  
@@ -184,6 +184,7 @@ AddToMenu Development "Development" Title
 +       "aterm%mini.term2.xpm%"        Exec  exec /usr/bin/aterm &
 +       ""    Nop
 +       "GVim%mini.gvim.png%"          Exec  exec /usr/bin/gvim &
++       "Eclipse"                      Exec  exec /usr/bin/eclipse &
 +       ""    Nop
 +       "VirtualBox%mini.desktop.xpm%" Exec  exec /usr/bin/virtualbox &
 
