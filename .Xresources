@@ -48,5 +48,7 @@ URxvt*scrollTtyOutput: false
 URxvt*scrollWithBuffer: true
 URxvt*scrollTtyKeypress: true
 URxvt*scrollBar_right: true
+URxvt*thickness: 14
+URxvt*scrollstyle: next
 URxvt*saveLines: 10000
 URxvt*smartresize: false
