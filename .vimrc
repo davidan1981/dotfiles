@@ -1,7 +1,22 @@
 " =========================================================================
-" Author: David An
-" Last Update: September 2015
-" Comments:
+"                                       
+"  ________  ________  ___      ___ ___  ________  ________      
+" |\   ___ \|\   __  \|\  \    /  /|\  \|\   ___ \|\   ____\     
+" \ \  \_|\ \ \  \|\  \ \  \  /  / | \  \ \  \_|\ \ \  \___|_    
+"  \ \  \ \\ \ \   __  \ \  \/  / / \ \  \ \  \ \\ \ \_____  \   
+"   \ \  \_\\ \ \  \ \  \ \    / /   \ \  \ \  \_\\ \|____|\  \  
+"    \ \_______\ \__\ \__\ \__/ /     \ \__\ \_______\____\_\  \ 
+"     \|_______|\|__|\|__|\|__|/       \|__|\|_______|\_________\
+"                                                    \|_________|
+"  ___      ___ ___  _____ ______                                
+" |\  \    /  /|\  \|\   _ \  _   \                              
+" \ \  \  /  / | \  \ \  \\\__\ \  \                             
+"  \ \  \/  / / \ \  \ \  \\|__| \  \                            
+"   \ \    / /   \ \  \ \  \    \ \  \                           
+"    \ \__/ /     \ \__\ \__\    \ \__\                          
+"     \|__|/       \|__|\|__|     \|__|                          
+"
+" =========================================================================
 "   - To reload this resource file, do <leader>sv which is mapped to 
 "     :so $MYVIMRC.
 "   - Use 'z' for navigation. For example, zt opens a new tab.
@@ -126,7 +141,7 @@ nnoremap <esc>w       <nop>
 nnoremap <esc>v       <nop>
 nnoremap <esc><cr>    <nop>
 nnoremap <esc><space> <nop>
-" nnoremap zc           :<c-u>execute "normal! ?^\s*class\r:nohlsearch\r"<cr>
+" I'm not sure if there is a better way to do this. And how do I allow paste?
 nnoremap zc           ?^\s*class<cr>:nohlsearch<cr>
 
 " =============
@@ -145,16 +160,19 @@ augroup filetype_ruby
     autocmd FileType     *.erb       setlocal textwidth=255
     autocmd FileType     ruby        nnoremap <buffer> <localleader>c I# <esc>
     autocmd FileType     ruby        nnoremap <buffer> <localleader>u I<esc>lxx
+    autocmd BufWritePre  ruby        call TrimWhitespace()
 augroup END
 augroup filetype_html
     autocmd!
     autocmd FileType     html        setlocal textwidth=255
+    autocmd BufWritePre  html        call TrimWhitespace()
 augroup END
 augroup filetype_js
     autocmd!
     autocmd FileType     javascript  nnoremap <buffer> <localleader>c I// <esc>
     autocmd FileType     javascript  nnoremap <buffer> <localleader>u I<esc>lxxx
     autocmd FileType     javascript  setlocal tabstop=2 shiftwidth=2
+    autocmd BufWritePre  javascript  call TrimWhitespace()
 augroup END
 augroup filetype_vim
     autocmd!
@@ -179,7 +197,7 @@ augroup END
 " ================
 " Terminal vs. GUI
 " ================
-" I just like having GUI vim with a different theme.
+" I just like having GUI vim possibly with a different theme.
 if has("gui_running")
   colorscheme davidan_white
   " set guifont=PT\ Mono:h14

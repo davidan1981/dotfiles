@@ -1,5 +1,12 @@
 xterm*font: -*-terminal-medium-r-*-*-*-*-*-*-*-110-iso8859-*
 xterm*allowBoldFonts: false
+
+XClock.Clock.majorColor:  rgb:0/0/0
+XClock.Clock.minorColor:  rgb:0/0/0
+XClock.Clock.hourColor:   rgb:0/0/0
+XClock.Clock.minuteColor: rgb:0/0/0
+XClock.Clock.secondColor: rgb:0/0/0
+
 aterm*loginShell:true
 aterm*transparent:false
 aterm*shading:20
@@ -13,7 +20,6 @@ aterm*font: -*-terminal-medium-r-*-*-*-*-*-*-*-110-iso8859-*
 aterm*boldFont: -*-terminal-medium-r-*-*-*-*-*-*-*-110-iso8859-*
 
 URxvt*background: #C3C3C3
-!! #F0FFF0
 URxvt*foreground: Black
 URxvt*transparent: false
 URxvt*inheritPixmap: false
@@ -29,20 +35,16 @@ URxvt.keysym.M-Up:     perl:font-size:increase
 URxvt.keysym.M-Down:   perl:font-size:decrease
 URxvt.keysym.M-C-Up:   perl:font-size:incglobal
 URxvt.keysym.M-C-Down: perl:font-size:decglobal
-!! URxvt.url-launcher: firefox
 URxvt.matcher.button: 1
 URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@!-]*[\\w/-]
-!! Tabs
 URxvt.tabbed.tabbar-fg: 8
 URxvt.tabbed.tabbar-bg: -1
 URxvt.tabbed.tab-fg: 2
 URxvt.tabbed.tab-bg: -1
-!! Keybindings
 URxvt*eightBitInput:   false
 URxvt*metaSendsEscape: false
 XTerm*eightBitInput:   false
 XTerm*metaSendsEscape: false
-!! Scroll behavior
 URxvt.searchable-scrollback: CM-s
 URxvt*scrollTtyOutput: false
 URxvt*scrollWithBuffer: true

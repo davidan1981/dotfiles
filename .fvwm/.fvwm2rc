@@ -22,8 +22,6 @@
 # |                                                                |
 # |                                                                |
 # |________________________________________________________________|
-#
-#
 
 ###############################
 # Set environment variables
@@ -67,7 +65,7 @@ Style "Fvwm*"       CirculateSkipIcon, CirculateSkip
 Style "FvwmPager"   NoTitle, Sticky, WindowListSkip
 Style "FvwmButtons" NoTitle, Sticky, WindowListSkip
 Style "FvwmButtons" CirculateSkip
-Style "FvwmButtons" ClickToFocus
+Style "FvwmButtons" ClickToFocus, BorderWidth 0, HandleWidth 0
 Style "*clock"      NoTitle, NoHandles, Sticky, WindowListSkip
 Style "xbiff"       NoTitle, Sticky, WindowListSkip
 Style "xbuffy"      NoTitle, Sticky
@@ -89,7 +87,7 @@ AddToFunc RestartFunction
 +       "I" Exec exec feh --bg-fill /home/rockalizer/Pictures/lillian_6month_indexed.jpg
 
 ###################################################
-# Desktop settings and shortcut keys to navigate
+# Desktop settings, keys, and pagers
 ###################################################
 DeskTopSize 3x2
 EdgeResistance 150 150
@@ -120,6 +118,12 @@ AddToFunc   FuncSelectWindow
 + I Focus
 + I Raise
 
+# *FvwmPagerBack #C3C3C3
+*FvwmPagerBack azure4
+*FvwmPagerRows 1
+*FvwmPagerFont none
+*FvwmPagerSmallFont 5x8
+
 #########
 # Menu
 #########
@@ -131,7 +135,7 @@ Mouse 2  R      A        Menu Other-Logins Nop
 Mouse 3  R      A        Menu RootMenu Nop
 # title bar buttons
 Mouse 0  1      A        Menu Window-Ops Nop
-Mouse 0  2      A        Resize
+Mouse 0  2      A        Maximize-Func
 Mouse 0  4      A        Iconify
 # for when you click the edge of a window
 Mouse 1  FS     A        Resize-or-Raise
@@ -143,14 +147,13 @@ Mouse 3  TSIF   A        RaiseLower
 # raise or lower window with alt-mousebutton1
 Mouse 1  W      M        Move-or-Raise
 
-##############  Defining Menu Options  #####################################
 AddToMenu Fvwm2-Actions  "Fvwm2 Actions"  Title   
 +       "Refresh%mini.refresh.xpm%"  Exec  exec xrefresh &
 +       "Move%mini.move.xpm%"        Move-or-Raise2
 +       "Destroy%mini.destroy.xpm%"  Destroy
 +       "Delete%mini.delete.xpm%"    Delete   
 +       ""    Nop
-+       "Restart%mini.start.xpm%"    Restart /usr/local/bin/fvwm2
++       "Restart%mini.fvwm.xpm%"    Restart /usr/local/bin/fvwm2
 +       ""    Nop
 +       ""    Nop
 +       "Quit%mini.exit.xpm%"        Quit  
@@ -176,11 +179,11 @@ AddToMenu Internet "Internet" Title
 
 DestroyMenu Development
 AddToMenu Development "Development" Title
-+       "urxvt%mini.term.xpm%"      Exec  exec /usr/bin/urxvt &
-+       "xterm%mini.xterm.xpm%"     Exec  exec /usr/bin/xterm &
-+       "aterm%mini.term2.xpm%"     Exec  exec /usr/bin/aterm &
++       "urxvt%mini.term.xpm%"         Exec  exec /usr/bin/urxvt &
++       "xterm%mini.xterm.xpm%"        Exec  exec /usr/bin/xterm &
++       "aterm%mini.term2.xpm%"        Exec  exec /usr/bin/aterm &
 +       ""    Nop
-+       "GVim%mini.gvim.png%"       Exec exec /usr/bin/gvim &
++       "GVim%mini.gvim.png%"          Exec  exec /usr/bin/gvim &
 +       ""    Nop
 +       "VirtualBox%mini.desktop.xpm%" Exec  exec /usr/bin/virtualbox &
 
@@ -213,16 +216,16 @@ AddToMenu Window-Ops  "This Window"  Title
 +       "Close"    Close
 +       "Destroy"  Destroy
 
-
-######################## Functions ########################################
-
+####################
+# Window Functions
+####################
 AddToFunc Move-or-Raise    "I" Raise
 +        "M" Move
-+          "D" Lower
++        "D" Lower
 
-AddToFunc Move-or-Raise2  "M" Raise
+AddToFunc Move-or-Raise2   "M" Raise
 +        "M" Move
-+          "D" Lower
++        "D" Lower
 
 AddToFunc Maximize-Func    "M" Maximize   0 100
 +        "C" Maximize   0 80
@@ -236,7 +239,7 @@ AddToFunc Resize-or-Raise  "I" Raise
 +        "M" Resize
 +        "D" Lower
 
-AddToFunc Resize-or-Raise2  "M" Raise
+AddToFunc Resize-or-Raise2 "M" Raise
 +        "M" Resize
 +        "D" Lower
 
@@ -246,41 +249,40 @@ AddToFunc PrintFunction    "I" Raise
 AddToFunc Iconify-and-Raise     "I" Iconify
 +                               "I" Raise
 
-# *FvwmButtonsBack #c3c3c3 
+#############
+# Buttons!
+#############
+*FvwmButtonsBack azure4
 *FvwmButtonsFore black
-*FvwmButtonsFont -adobe-helvetica-bold-r-*-*-12-*-*-*-*-*-*-*
-*FvwmButtonsGeometry +0+0
-*FvwmButtonsColumns 1
+*FvwmButtonsFont 6x10
+*FvwmButtonsGeometry -0+0
+*FvwmButtonsRows 1
 *FvwmButtonsBoxSize smart
-*FvwmButtons(Icon folder.xpm, Action 'Exec "rox-filer" rox-filer &')
-*FvwmButtons(Icon term.xpm, Action 'Exec "urxvt" urxvt &')
-*FvwmButtons(Icon xterm.xpm, Action 'Exec "xterm" xterm &')
-*FvwmButtons(Icon chromium-browser.png, Action 'Exec "chromium-browser" chromium-browser &')
-*FvwmButtons(Icon hipchat4.png, Action 'Exec "hipchat4" /usr/local/bin/hipchat4 &')
-*FvwmButtons(Icon screengrab.png, Action 'Exec "screengrab" screengrab &')
-*FvwmButtons(1x1 Swallow XLoad 'Exec xload -bg rgb:90/80/90 -fg black &')
-*FvwmButtons(1x1 Swallow XClock 'Exec xclock -bg rgb:90/80/90 &')
-*FvwmButtons(Swallow(Hints,NoTitle) dclock `Exec exec  dclock  -date "%b %d" -thickness 0.5 -noblink -led_off rgb:80/70/80 -slope 90 -nomiltime -bg rgb:90/80/90 -fg 'black'`)
-*FvwmButtons(1x1 Swallow(UseOld,NoTitle) "FvwmPager" "Module FvwmPager 0 0")
+*FvwmButtonsFrame 1
+*FvwmButtons(Icon menu.xpm, Action 'Menu RootMenu')
+*FvwmButtons: (Container(rows 2, columns 2, Frame1))
+  *FvwmButtons(1x1 Icon mini.directory.xpm, Action 'Exec "rox-filer" rox-filer &')
+  *FvwmButtons(1x1 Icon mini.eye.xpm, Action 'Exec "screengrab" screengrab &')
+  *FvwmButtons(1x1 Icon mini.term.xpm, Action 'Exec urxvt &')
+  *FvwmButtons(1x1 Icon mini.penguin.xpm, Action 'Exec unity-control-center &')
+*FvwmButtons: (End)
+*FvwmButtons(Swallow XLoad 'Exec xload -bg azure4 -fg black -fn 6x10 &')
+*FvwmButtons(Swallow XClock 'Exec xclock -bg azure4 -update 1 &')
+*FvwmButtons(Swallow(Hints,NoTitle) dclock `Exec exec  dclock  -date "%b %d" -thickness 0.5 -noblink -led_off rgb:80/70/80 -slope 90 -nomiltime -bg azure4 -fg 'black' -fn 6x10`)
+*FvwmButtons(Swallow(NoTitle) "FvwmPager" "Module FvwmPager 0 0")
 
-# *FvwmPagerBack #C3C3C3
-*FvwmPagerRows 1
-*FvwmPager: SolidSeparators
-*FvwmPager: SmallFont "6x10"
-*FvwmPager: WindowLabelFormat ""
-
-*FvwmWinListFont -adobe-helvetica-bold-r-*-*-10-*-*-*-*-*-*-*
+##############
+# Window list
+##############
 *FvwmWinListAction Click1 Iconify -1,Focus
 *FvwmWinListAction Click2 Iconify
 *FvwmWinListAction Click3 Module "FvwmIdent" FvwmIdent
 *FvwmWinListUseSkipList
 *FvwmWinListGeometry +0-1
 
+########
+# Misc
+########
 *FvwmIconBox            "Fvwm*"         -
-
-# BorderStyle    Simple -- HiddenHandles Inset
-# TitleStyle    LeftJustified Height 24
-# MenuStyle   black #908090 #000000 -adobe-helvetica-bold-r-*-10-* mwm
-
 Key Escape  A  C  WindowList
 Key F1 A N Exec exec /usr/local/bin/xlock -mode dclock -mono -nice 10
