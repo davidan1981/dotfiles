@@ -1,20 +1,28 @@
+#  ________________________________________________________________ 
+# | _ |                    David's FVWM                    | _ | _ |
+# |___|____________________________________________________|___|___|
+# |                                                                |
+# |                                                                |
+# |  ________  ________  ___      ___ ___  ________  ________      |
+# | |\   ___ \|\   __  \|\  \    /  /|\  \|\   ___ \|\   ____\     |
+# | \ \  \_|\ \ \  \|\  \ \  \  /  / | \  \ \  \_|\ \ \  \___|_    |
+# |  \ \  \ \\ \ \   __  \ \  \/  / / \ \  \ \  \ \\ \ \_____  \   |
+# |   \ \  \_\\ \ \  \ \  \ \    / /   \ \  \ \  \_\\ \|____|\  \  |
+# |    \ \_______\ \__\ \__\ \__/ /     \ \__\ \_______\____\_\  \ |
+# |     \|_______|\|__|\|__|\|__|/       \|__|\|_______|\_________\|
+# |                                                    \|_________||
+# |                                                                |
+# |  ________ ___      ___ ___       __   _____ ______             |
+# | |\  _____\\  \    /  /|\  \     |\  \|\   _ \  _   \           |
+# | \ \  \__/\ \  \  /  / | \  \    \ \  \ \  \\\__\ \  \          |
+# |  \ \   __\\ \  \/  / / \ \  \  __\ \  \ \  \\|__| \  \         |
+# |   \ \  \_| \ \    / /   \ \  \|\__\_\  \ \  \    \ \  \        |
+# |    \ \__\   \ \__/ /     \ \____________\ \__\    \ \__\       |
+# |     \|__|    \|__|/       \|____________|\|__|     \|__|       |
+# |                                                                |
+# |                                                                |
+# |________________________________________________________________|
 #
-#  ________  ________  ___      ___ ___  ________  ________      
-# |\   ___ \|\   __  \|\  \    /  /|\  \|\   ___ \|\   ____\     
-# \ \  \_|\ \ \  \|\  \ \  \  /  / | \  \ \  \_|\ \ \  \___|_    
-#  \ \  \ \\ \ \   __  \ \  \/  / / \ \  \ \  \ \\ \ \_____  \   
-#   \ \  \_\\ \ \  \ \  \ \    / /   \ \  \ \  \_\\ \|____|\  \  
-#    \ \_______\ \__\ \__\ \__/ /     \ \__\ \_______\____\_\  \ 
-#     \|_______|\|__|\|__|\|__|/       \|__|\|_______|\_________\
-#                                                    \|_________|
-#  ________ ___      ___ ___       __   _____ ______             
-# |\  _____\\  \    /  /|\  \     |\  \|\   _ \  _   \           
-# \ \  \__/\ \  \  /  / | \  \    \ \  \ \  \\\__\ \  \          
-#  \ \   __\\ \  \/  / / \ \  \  __\ \  \ \  \\|__| \  \         
-#   \ \  \_| \ \    / /   \ \  \|\__\_\  \ \  \    \ \  \        
-#    \ \__\   \ \__/ /     \ \____________\ \__\    \ \__\       
-#     \|__|    \|__|/       \|____________|\|__|     \|__|       
-#                                                           
 #
 
 ###############################
@@ -29,31 +37,68 @@ SetEnv fvwm_script $./scripts
 SetEnv fvwm_wallpapers $[FVWM_USERDIR]/wallpapers
 SetEnv fvwm_webbrowser /usr/bin/chromium-browswer
 SetEnv fvwm_term /usr/bin/urxvt
+SetEnv fvwm_hilight #4169E1
+SetEnv fvwm_window_font -*-fixed-*-*-*-*-*-*-*-*-*-80-*-*
 
-#ModulePath /usr/local/depot/fvwm-2.0.45/lib/fvwm2
+#########
+# Paths
+#########
 ImagePath $[fvwm_icons]:$[fvwm_icons];.png:$[fvwm_icons];.jpg:$[fvwm_imgs]:$[fvwm_wallpapers]:$[fvwm_48_icons]:$[fvwm_32_icons]:$[fvwm_pixmaps]
-
-# ImagePath /usr/include/X11/pixmaps/:/usr/X11R6/icons/:/usr/include/X11/bitmaps/:/usr/local/icons/:/usr/share/pixmaps/fvwm/:/usr/share/icons/hicolor/48x48/apps/:/usr/share/pixmaps/:/usr/share/icons/hicolor/32x32/apps/
 
 #################
 # Default fonts
 #################
-# WindowFont     -adobe-helvetica-bold-r-*-14-*
-# IconFont
+WindowFont       $[fvwm_window_font]
+
+##############################
+# Global styles and options
+##############################
+HilightColor white  $[fvwm_hilight]
+Emulate Mwm
+MenuStyle Mwm
+SnapGrid 3 3
+Style "*"           MWMFunctions, MwmBorder, MwmButtons, MwmDecor
+Style "*"           DecorateTransient, NoPPosition
+Style "*"           FocusFollowsMouse, MouseFocusClickRaises
+Style "*"           ActivePlacement, RandomPlacement
+Style "*"           IconBox +100 +15 -15 -15, IconFill top left
+Style "Fvwm*"       NoTitle,  Sticky, WindowListSkip
+Style "Fvwm*"       CirculateSkipIcon, CirculateSkip
+Style "FvwmPager"   NoTitle, Sticky, WindowListSkip
+Style "FvwmButtons" NoTitle, Sticky, WindowListSkip
+Style "FvwmButtons" CirculateSkip
+Style "FvwmButtons" ClickToFocus
+Style "*clock"      NoTitle, NoHandles, Sticky, WindowListSkip
+Style "xbiff"       NoTitle, Sticky, WindowListSkip
+Style "xbuffy"      NoTitle, Sticky
+Style "xcalc"       RandomPlacement
+Style "xman"        RandomPlacement
+Style "xterm"       Icon xterm.xpm
+Style "urxvt"       Icon term.xpm
+
+##############################
+# Initialization and restart
+##############################
+AddToFunc InitFunction    
++       "I" Exec exec xscreensaver -no-splash
++       "I" Module FvwmButtons
++       "I" Exec exec feh --bg-fill /home/rockalizer/Pictures/lillian_6month_indexed.jpg
+
+AddToFunc RestartFunction 
++       "I" Module FvwmButtons
++       "I" Exec exec feh --bg-fill /home/rockalizer/Pictures/lillian_6month_indexed.jpg
 
 ###################################################
 # Desktop settings and shortcut keys to navigate
 ###################################################
-DeskTopSize 2x2
+DeskTopSize 3x2
 EdgeResistance 150 150
 EdgeScroll 100 100
 EdgeThickness 1
-
 Key Left     A        SC       FuncMoveWindowToPage -1p +0p
 Key Right    A        SC       FuncMoveWindowToPage +1p +0p
 Key Up       A        SC       FuncMoveWindowToPage +0p -1p
 Key Down     A        SC       FuncMoveWindowToPage +0p +1p
-
 Key Left     A        C        FuncGotoPage -1p +0p
 Key Right    A        C        FuncGotoPage +1p +0p
 Key Up       A        C        FuncGotoPage +0p -1p
@@ -75,67 +120,19 @@ AddToFunc   FuncSelectWindow
 + I Focus
 + I Raise
 
-##############################
-# Global styles and options
-##############################
-HilightColor white #C71585
-Emulate Mwm
-MenuStyle Mwm
-SnapGrid 3 3
-Style "*"           MWMFunctions, MWMDecor
-Style "*"           DecorateTransient, NoPPosition
-Style "*"           FocusFollowsMouse, MouseFocusClickRaises
-Style "*"           ActivePlacement, RandomPlacement
-Style "*"           IconBox +100 +15 -15 -15, IconFill top left
-
-Style "Fvwm*"       NoTitle,  Sticky, WindowListSkip
-Style "Fvwm*"       CirculateSkipIcon, CirculateSkip
-Style "FvwmPager"   NoTitle, Sticky, WindowListSkip
-Style "FvwmButtons" NoTitle, Sticky, WindowListSkip
-Style "FvwmButtons" CirculateSkip
-Style "FvwmButtons" ClickToFocus
-
-Style "*clock"      NoTitle, NoHandles, Sticky, WindowListSkip
-Style "xbiff"       NoTitle, Sticky, WindowListSkip
-Style "xbuffy"      NoTitle, Sticky
-Style "xcalc"       RandomPlacement
-Style "xman"        RandomPlacement
-Style "xterm"       Icon xterm.xpm
-Style "urxvt"       Icon term.xpm
-
-######################  Menu Options  ########################
-# Valid Contexts...combinations of:
-# R=root window
-# W=application window
-# T=titlebar
-# S=side, top, or bottom bar
-# F=frame (corners)
-# I=icon window
-#
-# Valid Modifiers...any combination of:
-# N=no modifiers
-# C=control
-# S=shift
-# M=meta
-# L=caps lock
-# A=any modifier
-
-# This controls the colors of the menu you get when you click your mouse
-# on a background.  The menu options are defined later.
+#########
+# Menu
+#########
 ClickTime 750
 ColormapFocus FollowsMouse
-
-
 # main pop-up menus
 Mouse 1  R      A        Menu Fvwm2-Actions Nop
 Mouse 2  R      A        Menu Other-Logins Nop
 Mouse 3  R      A        Menu RootMenu Nop
-
 # title bar buttons
 Mouse 0  1      A        Menu Window-Ops Nop
 Mouse 0  2      A        Resize
 Mouse 0  4      A        Iconify
-
 # for when you click the edge of a window
 Mouse 1  FS     A        Resize-or-Raise
 Mouse 1  T      A        Move-or-Raise
@@ -143,75 +140,81 @@ Mouse 1  I      A        Move-or-Iconify
 Mouse 2  I      A        Iconify
 Mouse 2  FST    A        Menu Window-Ops Nop
 Mouse 3  TSIF   A        RaiseLower
-
 # raise or lower window with alt-mousebutton1
 Mouse 1  W      M        Move-or-Raise
 
-########################Initialization Functions ############################
-# "Auto" is the autoraise delay time, in milliseconds.
-
-AddToFunc InitFunction    
-+       "I" Module FvwmButtons
-+       "I" Exec exec feh --bg-fill /home/rockalizer/Pictures/lillian_6month_indexed.jpg
-
-AddToFunc RestartFunction 
-+       "I" Module FvwmButtons
-+       "I" Exec exec feh --bg-fill /home/rockalizer/Pictures/lillian_6month_indexed.jpg
-
 ##############  Defining Menu Options  #####################################
 AddToMenu Fvwm2-Actions  "Fvwm2 Actions"  Title   
-+       "Refresh"  Exec  exec xrefresh &
++       "Refresh%mini.refresh.xpm%"  Exec  exec xrefresh &
++       "Move%mini.move.xpm%"        Move-or-Raise2
++       "Destroy%mini.destroy.xpm%"  Destroy
++       "Delete%mini.delete.xpm%"    Delete   
 +       ""    Nop
-+       "Move"    Move-or-Raise2
++       "Restart%mini.start.xpm%"    Restart /usr/local/bin/fvwm2
 +       ""    Nop
-+       "Destroy"  Destroy
-+       "Delete"  Delete   
 +       ""    Nop
-+       "Restart"   Restart /usr/local/bin/fvwm2
-+       ""    Nop
-+       "Quit"    Quit  
++       "Quit%mini.exit.xpm%"        Quit  
 
 AddToMenu RootMenu  "Root Menu"  Title      
-+       "Applications" Popup Applications
-+       "X Utilities" Popup XUtilities
++       "Applications%mini.window2.xpm%"    Popup Applications
++       "X Utilities%mini.x.xpm%"           Popup XUtilities
 +       ""    Nop
-+       "Settings"   Exec  exec /usr/bin/unity-control-center &
++       "Settings%mini.penguin.xpm%"        Exec  exec /usr/bin/unity-control-center &
 +       ""    Nop
-+       "Active Windows"  WindowList
++       "Active Windows%mini.windows.xpm%"  WindowList
 
 DestroyMenu XUtilities
 AddToMenu XUtilities "X Utilities" Title
-+       "xcalc"      Exec  exec xcalc &
-+       "Manual"     Exec  exec xman -notopbox -fn 9x15 &
++       "xterm%mini.xterm.xpm%"     Exec  exec /usr/bin/xterm &
++       "xcalc%mini.calc.xpm%"      Exec  exec xcalc &
++       "Manual%mini.xman.xpm%"     Exec  exec xman -notopbox -fn 9x15 &
+
+DestroyMenu Internet
+AddToMenu Internet "Internet" Title
++       "Chrome"                    Exec  exec /usr/bin/chromium-browser &
++       "Firefox"                   Exec  exec /usr/bin/firefox &
+
+DestroyMenu Development
+AddToMenu Development "Development" Title
++       "urxvt%mini.term.xpm%"      Exec  exec /usr/bin/urxvt &
++       "xterm%mini.xterm.xpm%"     Exec  exec /usr/bin/xterm &
++       "aterm%mini.term2.xpm%"     Exec  exec /usr/bin/aterm &
++       ""    Nop
++       "GVim%mini.gvim.png%"       Exec exec /usr/bin/gvim &
++       ""    Nop
++       "VirtualBox%mini.desktop.xpm%" Exec  exec /usr/bin/virtualbox &
+
+DestroyMenu Productivity
+AddToMenu Productivity "Productivity" Title
++       "HipChat4"   Exec  exec /usr/local/bin/hipchat4 &
++       "Zoom"       Exec  exec /usr/bin/zoom &
++       "Slack"      Exec  exec /usr/bin/slack &
+
+DestroyMenu Graphics
+AddToMenu Graphics "Graphics" Title
++       "Gimp%mini.gimp.xpm%"       Exec  exec /usr/bin/gimp &
++       "XPaint%mini.xpaint.xpm%"   Exec  exec /usr/bin/xpaint &
++       "Darktable"                 Exec  exec /usr/bin/darktable &
 
 DestroyMenu Applications
 AddToMenu Applications "Applications" Title
-+       "urxvt%mini.term.xpm%"      Exec  exec /usr/bin/urxvt &
-+       "xterm%mini.xterm.xpm%"      Exec  exec /usr/bin/xterm &
-+       "aterm%mini.term2.xpm%"      Exec  exec /usr/bin/aterm &
-+       ""    Nop
-+       "HipChat4"   Exec  exec /usr/local/bin/hipchat4 &
-+       "Zoom"       Exec  exec /usr/bin/zoom &
-+       "VirtualBox%mini.desktop.xpm%" Exec  exec /usr/bin/virtualbox &
-+       ""    Nop
-+       "Gimp%mini.gimp.xpm%"       Exec  exec /usr/bin/gimp &
++       "Internet%mini.nscape.xpm%"       Popup Internet
++       "Productivity%mini.chart.xpm%"    Popup Productivity
++       "Development%mini.hammer.xpm%"    Popup Development
++       "Graphics%mini.paint2.xpm%"       Popup Graphics
 
 AddToMenu Window-Ops  "This Window"  Title
-+       "Move"    Move
-+       "Resize"  Resize
++       "Move"     Move
++       "Resize"   Resize
 +       "Iconify"  Iconify
 +       "Stick"    Stick
 +       ""    Nop
-+       "Delete"  Delete
++       "Delete"   Delete
 +       "Close"    Close
 +       "Destroy"  Destroy
 
 
 ######################## Functions ########################################
-
-AddToFunc MailFunction     "I" Next [$0] Iconify -1
-+               "I" Next [$0] focus
-+         "I" None [$0] Exec $0 $1
 
 AddToFunc Move-or-Raise    "I" Raise
 +        "M" Move
@@ -243,7 +246,7 @@ AddToFunc PrintFunction    "I" Raise
 AddToFunc Iconify-and-Raise     "I" Iconify
 +                               "I" Raise
 
-*FvwmButtonsBack #c3c3c3 
+# *FvwmButtonsBack #c3c3c3 
 *FvwmButtonsFore black
 *FvwmButtonsFont -adobe-helvetica-bold-r-*-*-12-*-*-*-*-*-*-*
 *FvwmButtonsGeometry +0+0
@@ -254,12 +257,13 @@ AddToFunc Iconify-and-Raise     "I" Iconify
 *FvwmButtons(Icon xterm.xpm, Action 'Exec "xterm" xterm &')
 *FvwmButtons(Icon chromium-browser.png, Action 'Exec "chromium-browser" chromium-browser &')
 *FvwmButtons(Icon hipchat4.png, Action 'Exec "hipchat4" /usr/local/bin/hipchat4 &')
-*FvwmButtons(Icon darktable.png, Action 'Exec "darktable" /usr/bin/darktable &')
 *FvwmButtons(Icon screengrab.png, Action 'Exec "screengrab" screengrab &')
-*FvwmButtons(1x1 Swallow XClock 'Exec xclock -bg rgb:c3/c3/c3 &')
-*FvwmButtons(1x1 Swallow(UseOld) "FvwmPager" "Module FvwmPager 0 0")
+*FvwmButtons(1x1 Swallow XLoad 'Exec xload -bg rgb:90/80/90 -fg black &')
+*FvwmButtons(1x1 Swallow XClock 'Exec xclock -bg rgb:90/80/90 &')
+*FvwmButtons(Swallow(Hints,NoTitle) dclock `Exec exec  dclock  -date "%b %d" -thickness 0.5 -noblink -led_off rgb:80/70/80 -slope 90 -nomiltime -bg rgb:90/80/90 -fg 'black'`)
+*FvwmButtons(1x1 Swallow(UseOld,NoTitle) "FvwmPager" "Module FvwmPager 0 0")
 
-*FvwmPagerBack #C3C3C3
+# *FvwmPagerBack #C3C3C3
 *FvwmPagerRows 1
 *FvwmPager: SolidSeparators
 *FvwmPager: SmallFont "6x10"
