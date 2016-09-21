@@ -1,3 +1,23 @@
+# =================================================================
+#  ________  ________  ___      ___ ___  ________  ________      
+# |\   ___ \|\   __  \|\  \    /  /|\  \|\   ___ \|\   ____\     
+# \ \  \_|\ \ \  \|\  \ \  \  /  / | \  \ \  \_|\ \ \  \___|_    
+#  \ \  \ \\ \ \   __  \ \  \/  / / \ \  \ \  \ \\ \ \_____  \   
+#   \ \  \_\\ \ \  \ \  \ \    / /   \ \  \ \  \_\\ \|____|\  \  
+#    \ \_______\ \__\ \__\ \__/ /     \ \__\ \_______\____\_\  \ 
+#     \|_______|\|__|\|__|\|__|/       \|__|\|_______|\_________\
+#                                                    \|_________|
+#  ________  ________  ________  ___  ___                        
+# |\   __  \|\   __  \|\   ____\|\  \|\  \                       
+# \ \  \|\ /\ \  \|\  \ \  \___|\ \  \\\  \                      
+#  \ \   __  \ \   __  \ \_____  \ \   __  \                     
+#   \ \  \|\  \ \  \ \  \|____|\  \ \  \ \  \                    
+#    \ \_______\ \__\ \__\____\_\  \ \__\ \__\                   
+#     \|_______|\|__|\|__|\_________\|__|\|__|                   
+#                        \|_________|                            
+#                                                                
+# =================================================================
+                                                               
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -56,24 +76,40 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+#######################
+# Show git branch name
+#######################
 parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]$(parse_git_branch)\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\W$(parse_git_branch)\$ '
-fi
-unset color_prompt force_color_prompt
+#######################################
+# Host specific prompt configuration
+#######################################
+case "$HOSTNAME" in
+rearden*)
+  if [ "$color_prompt" = yes ]; then
+      PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]$(parse_git_branch)\[\033[00m\]\$ '
+  else
+      PS1='${debian_chroot:+($debian_chroot)}\u@\h:\W$(parse_git_branch)\$ '
+  fi
+  unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \W$(parse_git_branch)\a\]$PS1"
-    ;;
-*)
-    ;;
+  # If this is an xterm set the title to user@host:dir
+  case "$TERM" in
+  xterm*|rxvt*)
+      PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \W$(parse_git_branch)\a\]$PS1"
+      ;;
+  *)
+      ;;
+  esac
+  ;;
+
+danconia*)
+  export LSCOLORS="gxfxhxhxbxhxhxbxhxgxgx"
+  export PS1='\u@\h:\W$(parse_git_branch)\[\033[00m\]$ ' 
+  ;;
+  
 esac
 
 # enable color support of ls and also add handy aliases
@@ -90,6 +126,10 @@ fi
 
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+####################
+# Global aliases
+####################
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -109,6 +149,43 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+#############
+# Aliases
+#############
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias mkdir='mkdir -pv'
+alias ll='ls -FGlAhp'
+alias less='less -FSRXc'
+alias be='bundle exec'
+
+##################
+# Global exports
+##################
+export PATH="$PATH:~/bin:~/.local/bin"
+
+#######################################
+# Host specific exports and aliases
+#######################################
+case "$HOSTNAME" in
+rearden*)
+  export PATH="$PATH:~/.odrive-agent/bin"
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+  export RBENV_ROOT=~/.rbenv
+;;
+danconia*)
+  export RBENV_ROOT="/usr/local/rbenv"
+  export PATH="$PATH:/usr/local/rbenv/bin:/usr/local/rbenv/shims:/usr/local/rbenv/plugins/ruby-build/bin"
+  alias ls='ls -G'
+;;
+esac
+
+##############
+# Misc
+##############
+eval "$(rbenv init -)"
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -119,17 +196,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-export PATH="$PATH:~/bin:~/.odrive-agent/bin:~/.local/bin"
-
-alias cp='cp -iv'
-alias mv='mv -iv'
-alias mkdir='mkdir -pv'
-alias ll='ls -FGlAhp'
-alias less='less -FSRXc'
-alias be='bundle exec'
-
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-export RBENV_ROOT=~/.rbenv
