@@ -81,11 +81,12 @@ Style "urxvt"       Icon term.xpm
 AddToFunc InitFunction    
 +       "I" Exec exec xscreensaver -no-splash
 +       "I" Module FvwmButtons
-+       "I" Exec exec feh --bg-fill /home/rockalizer/Pictures/lillian_6month_indexed.jpg
++       "I" BuildWallPaperMenu
++       "I" InitWallpaper
 
 AddToFunc RestartFunction 
 +       "I" Module FvwmButtons
-+       "I" Exec exec feh --bg-fill /home/rockalizer/Pictures/lillian_6month_indexed.jpg
++       "I" BuildWallPaperMenu
 
 ###################################################
 # Desktop settings, keys, and pagers
@@ -119,11 +120,44 @@ AddToFunc   FuncSelectWindow
 + I Focus
 + I Raise
 
-# *FvwmPagerBack #C3C3C3
+#########
+# Pager
+#########
 *FvwmPagerBack $[fvwm_back]
 *FvwmPagerRows 1
 *FvwmPagerFont none
 *FvwmPagerSmallFont 5x8
+
+#############
+# Wallpaper
+#############
+DestroyFunc BuildWallPaperMenu
+AddToFunc   BuildWallPaperMenu
++ I Exec rm $[fvwm_icons]/wallpapers/*
++ I PipeRead 'for i in $[fvwm_wallpapers]/*.png; \
+  do convert -scale 64 $i \
+  "$[fvwm_icons]/wallpapers/`basename $i`"; done && echo Nop'
++ I Exec rm $[FVWM_USERDIR]/WallpaperMenu
++ I Exec echo "DestroyMenu FvwmWallpaperMenu" > \
+  $[FVWM_USERDIR]/WallpaperMenu
++ I Exec echo "AddToMenu FvwmWallpaperMenu \"Wallpapers\" Title" >> \
+  $[FVWM_USERDIR]/WallpaperMenu
++ I PipeRead 'for i in $[fvwm_wallpapers]/*.png; \
+  do echo "AddToMenu FvwmWallpaperMenu \
+  \"`basename $i`%$[fvwm_icons]/wallpapers/`basename $i`%\" \
+  FvwmChangeBackground \"`basename $i`\"" \
+  >> $[FVWM_USERDIR]/WallpaperMenu; done && echo Nop'
++ I Read $[FVWM_USERDIR]/WallpaperMenu
+
+DestroyFunc FvwmChangeBackground
+AddToFunc   FvwmChangeBackground
++ I Exec exec feh --bg-fill $[fvwm_wallpapers]/$0
++ I Exec echo "feh --bg-fill \
+  $[fvwm_wallpapers]/$0" > $[FVWM_USERDIR]/cfg/background.cfg
+
+DestroyFunc InitWallpaper
+AddToFunc   InitWallpaper
++ I Exec source $[FVWM_USERDIR]/cfg/background.cfg
 
 #########
 # Menu
@@ -164,6 +198,8 @@ AddToMenu RootMenu  "Root Menu"  Title
 +       "X Utilities%mini.x.xpm%"           Popup XUtilities
 +       ""    Nop
 +       "Settings%mini.penguin.xpm%"        Exec  exec /usr/bin/unity-control-center &
++       "Build Wallpapers"                  BuildWallPaperMenu
++       "Wallpaper"                         Popup FvwmWallpaperMenu
 +       ""    Nop
 +       "Active Windows%mini.windows.xpm%"  WindowList
 +       ""    Nop
