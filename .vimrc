@@ -160,7 +160,7 @@ augroup filetype_ruby
     autocmd FileType     *.erb       setlocal textwidth=255
     autocmd FileType     ruby        nnoremap <buffer> <localleader>c I# <esc>
     autocmd FileType     ruby        nnoremap <buffer> <localleader>u I<esc>lxx
-    autocmd BufWritePre  ruby        call TrimWhitespace()
+    autocmd BufWritePre  *.rb        call TrimWhitespace()
 augroup END
 augroup filetype_html
     autocmd!

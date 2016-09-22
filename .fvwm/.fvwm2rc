@@ -36,6 +36,7 @@ SetEnv fvwm_wallpapers $[FVWM_USERDIR]/wallpapers
 SetEnv fvwm_webbrowser /usr/bin/chromium-browswer
 SetEnv fvwm_term /usr/bin/urxvt
 SetEnv fvwm_hilight #4169E1
+SetEnv fvwm_back azure4
 SetEnv fvwm_window_font -*-fixed-*-*-*-*-*-*-*-*-*-80-*-*
 
 #########
@@ -119,7 +120,7 @@ AddToFunc   FuncSelectWindow
 + I Raise
 
 # *FvwmPagerBack #C3C3C3
-*FvwmPagerBack azure4
+*FvwmPagerBack $[fvwm_back]
 *FvwmPagerRows 1
 *FvwmPagerFont none
 *FvwmPagerSmallFont 5x8
@@ -165,11 +166,19 @@ AddToMenu RootMenu  "Root Menu"  Title
 +       "Settings%mini.penguin.xpm%"        Exec  exec /usr/bin/unity-control-center &
 +       ""    Nop
 +       "Active Windows%mini.windows.xpm%"  WindowList
++       ""    Nop
++       "Power%mini.crosbone.xpm%"         Popup Power
+
+DestroyMenu Power
+AddToMenu Power "Power" Title
++       "Suspend" Exec exec gksudo pm-suspend
+
 
 DestroyMenu XUtilities
 AddToMenu XUtilities "X Utilities" Title
 +       "xterm%mini.xterm.xpm%"     Exec  exec /usr/bin/xterm &
 +       "xcalc%mini.calc.xpm%"      Exec  exec xcalc &
++       "xfontsel%mini.font.xpm%"   Exec  exec xfontsel &
 +       "Manual%mini.xman.xpm%"     Exec  exec xman -notopbox -fn 9x15 &
 
 DestroyMenu Internet
@@ -207,6 +216,7 @@ AddToMenu Applications "Applications" Title
 +       "Development%mini.hammer.xpm%"    Popup Development
 +       "Graphics%mini.paint2.xpm%"       Popup Graphics
 
+DestroyMenu Window-Ops
 AddToMenu Window-Ops  "This Window"  Title
 +       "Move"     Move
 +       "Resize"   Resize
@@ -253,23 +263,23 @@ AddToFunc Iconify-and-Raise     "I" Iconify
 #############
 # Buttons!
 #############
-*FvwmButtonsBack azure4
+*FvwmButtonsBack $[fvwm_back]
 *FvwmButtonsFore black
 *FvwmButtonsFont 6x10
-*FvwmButtonsGeometry -0+0
+*FvwmButtonsGeometry 360x60-0+0
 *FvwmButtonsRows 1
-*FvwmButtonsBoxSize smart
+*FvwmButtonsBoxSize dumb
 *FvwmButtonsFrame 1
-*FvwmButtons(Icon menu.xpm, Action 'Menu RootMenu')
+*FvwmButtons(Icon programs.xpm, Action 'Menu RootMenu')
 *FvwmButtons: (Container(rows 2, columns 2, Frame1))
   *FvwmButtons(1x1 Icon mini.directory.xpm, Action 'Exec "rox-filer" rox-filer &')
-  *FvwmButtons(1x1 Icon mini.eye.xpm, Action 'Exec "screengrab" screengrab &')
+  *FvwmButtons(1x1 Icon mini.camera.xpm, Action 'Exec "screengrab" screengrab &')
   *FvwmButtons(1x1 Icon mini.term.xpm, Action 'Exec urxvt &')
   *FvwmButtons(1x1 Icon mini.penguin.xpm, Action 'Exec unity-control-center &')
 *FvwmButtons: (End)
-*FvwmButtons(Swallow XLoad 'Exec xload -bg azure4 -fg black -fn 6x10 &')
-*FvwmButtons(Swallow XClock 'Exec xclock -bg azure4 -update 1 &')
-*FvwmButtons(Swallow(Hints,NoTitle) dclock `Exec exec  dclock  -date "%b %d" -thickness 0.5 -noblink -led_off rgb:80/70/80 -slope 90 -nomiltime -bg azure4 -fg 'black' -fn 6x10`)
+*FvwmButtons(Swallow XLoad 'Exec xload -bg $[fvwm_back] -fg black -fn 6x10 &')
+*FvwmButtons(Swallow XClock 'Exec xclock -bg $[fvwm_back] -update 1 &')
+*FvwmButtons(Swallow(Hints,NoTitle) dclock `Exec exec  dclock  -date "%b %d" -thickness 0.5 -noblink -led_off rgb:80/70/80 -slope 90 -nomiltime -bg $[fvwm_back] -fg 'black' -fn 6x10`)
 *FvwmButtons(Swallow(NoTitle) "FvwmPager" "Module FvwmPager 0 0")
 
 ##############
