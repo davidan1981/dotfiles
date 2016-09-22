@@ -183,85 +183,85 @@ Mouse 3  TSIF   A        RaiseLower
 Mouse 1  W      M        Move-or-Raise
 
 AddToMenu Fvwm2-Actions  "Fvwm2 Actions"  Title   
-+       "Refresh%mini.refresh.xpm%"  Exec  exec xrefresh &
-+       "Move%mini.move.xpm%"        Move-or-Raise2
-+       "Destroy%mini.destroy.xpm%"  Destroy
-+       "Delete%mini.delete.xpm%"    Delete   
-+       ""    Nop
-+       "Restart%mini.fvwm.xpm%"     Restart /usr/local/bin/fvwm2
-+       ""    Nop
-+       ""    Nop
-+       "Quit%mini.exit.xpm%"        Quit  
++ "Refresh%mini.refresh.xpm%"  Exec  exec xrefresh &
++ "Move%mini.move.xpm%"        Move-or-Raise2
++ "Destroy%mini.destroy.xpm%"  Destroy
++ "Delete%mini.delete.xpm%"    Delete   
++ ""    Nop
++ "Restart%mini.fvwm.xpm%"     Restart /usr/local/bin/fvwm2
++ ""    Nop
++ ""    Nop
++ "Quit%mini.exit.xpm%"        Quit  
 
 AddToMenu RootMenu  "Root Menu"  Title      
-+       "Applications%mini.window2.xpm%"    Popup Applications
-+       "X Utilities%mini.x.xpm%"           Popup XUtilities
-+       ""    Nop
-+       "Settings%mini.penguin.xpm%"        Exec  exec /usr/bin/unity-control-center &
-+       "Build Wallpapers"                  BuildWallPaperMenu
-+       "Wallpaper"                         Popup FvwmWallpaperMenu
-+       ""    Nop
-+       "Active Windows%mini.windows.xpm%"  WindowList
-+       ""    Nop
-+       "Power%mini.crosbone.xpm%"         Popup Power
++ "Applications%mini.window2.xpm%"    Popup Applications
++ "X Utilities%mini.x.xpm%"           Popup XUtilities
++ ""    Nop
++ "Settings%mini.penguin.xpm%"        Exec  exec /usr/bin/unity-control-center &
++ "Build Wallpapers"                  BuildWallPaperMenu
++ "Wallpaper"                         Popup FvwmWallpaperMenu
++ ""    Nop
++ "Active Windows%mini.windows.xpm%"  WindowList
++ ""    Nop
++ "Power%mini.crosbone.xpm%"         Popup Power
 
 DestroyMenu Power
 AddToMenu Power "Power" Title
-+       "Suspend" Exec exec gksudo pm-suspend
++ "Suspend" Exec exec gksudo pm-suspend
 
 
 DestroyMenu XUtilities
 AddToMenu XUtilities "X Utilities" Title
-+       "xterm%mini.xterm.xpm%"     Exec  exec /usr/bin/xterm &
-+       "xcalc%mini.calc.xpm%"      Exec  exec xcalc &
-+       "xfontsel%mini.font.xpm%"   Exec  exec xfontsel &
-+       "Manual%mini.xman.xpm%"     Exec  exec xman -notopbox -fn 9x15 &
++ "xterm%mini.xterm.xpm%"     Exec  exec /usr/bin/xterm &
++ "xcalc%mini.calc.xpm%"      Exec  exec xcalc &
++ "xfontsel%mini.font.xpm%"   Exec  exec xfontsel &
++ "Manual%mini.xman.xpm%"     Exec  exec xman -notopbox -fn 9x15 &
 
 DestroyMenu Internet
 AddToMenu Internet "Internet" Title
-+       "Chrome"                    Exec  exec /usr/bin/chromium-browser &
-+       "Firefox"                   Exec  exec /usr/bin/firefox &
++ "Chrome"                    Exec  exec /usr/bin/chromium-browser &
++ "Firefox"                   Exec  exec /usr/bin/firefox &
 
 DestroyMenu Development
 AddToMenu Development "Development" Title
-+       "urxvt%mini.term.xpm%"         Exec  exec /usr/bin/urxvt &
-+       "xterm%mini.xterm.xpm%"        Exec  exec /usr/bin/xterm &
-+       "aterm%mini.term2.xpm%"        Exec  exec /usr/bin/aterm &
-+       ""    Nop
-+       "GVim%mini.gvim.png%"          Exec  exec /usr/bin/gvim &
-+       "Eclipse"                      Exec  exec /usr/bin/eclipse &
-+       ""    Nop
-+       "VirtualBox%mini.desktop.xpm%" Exec  exec /usr/bin/virtualbox &
++ "urxvt%mini.term.xpm%"         Exec  exec /usr/bin/urxvt &
++ "xterm%mini.xterm.xpm%"        Exec  exec /usr/bin/xterm &
++ "aterm%mini.term2.xpm%"        Exec  exec /usr/bin/aterm &
++ ""    Nop
++ "GVim%mini.gvim.png%"          Exec  exec /usr/bin/gvim &
++ "Eclipse"                      Exec  exec /usr/bin/eclipse &
++ ""    Nop
++ "VirtualBox%mini.desktop.xpm%" Exec  exec /usr/bin/virtualbox &
 
 DestroyMenu Productivity
 AddToMenu Productivity "Productivity" Title
-+       "HipChat4"   Exec  exec /usr/local/bin/hipchat4 &
-+       "Zoom"       Exec  exec /usr/bin/zoom &
-+       "Slack"      Exec  exec /usr/bin/slack &
++ "HipChat4"   Exec  exec /usr/local/bin/hipchat4 &
++ "Zoom"       Exec  exec /usr/bin/zoom &
++ "Slack"      Exec  exec /usr/bin/slack &
 
 DestroyMenu Graphics
 AddToMenu Graphics "Graphics" Title
-+       "Gimp%mini.gimp.xpm%"       Exec  exec /usr/bin/gimp &
-+       "XPaint%mini.xpaint.xpm%"   Exec  exec /usr/bin/xpaint &
-+       "Darktable"                 Exec  exec /usr/bin/darktable &
++ "Gimp%mini.gimp.xpm%"       Exec  exec /usr/bin/gimp &
++ "XPaint%mini.xpaint.xpm%"   Exec  exec /usr/bin/xpaint &
++ "Darktable"                 Exec  exec /usr/bin/darktable &
 
 DestroyMenu Applications
 AddToMenu Applications "Applications" Title
-+       "Internet%mini.nscape.xpm%"       Popup Internet
-+       "Productivity%mini.chart.xpm%"    Popup Productivity
-+       "Development%mini.hammer.xpm%"    Popup Development
-+       "Graphics%mini.paint2.xpm%"       Popup Graphics
++ "Internet%mini.nscape.xpm%"       Popup Internet
++ "Productivity%mini.chart.xpm%"    Popup Productivity
++ "Development%mini.hammer.xpm%"    Popup Development
++ "Graphics%mini.paint2.xpm%"       Popup Graphics
 
 DestroyMenu Window-Ops
 AddToMenu Window-Ops  "This Window"  Title
-+       "Move"     Move
-+       "Resize"   Resize
-+       "Iconify"  Iconify
-+       "Stick"    Stick
-+       ""    Nop
-+       "Delete"   Delete
-+       "Close"    Close
-+       "Destroy"  Destroy
++ "Move"     Move
++ "Resize"   Resize
++ "Iconify"  Iconify
++ "Stick"    Stick
++ ""    Nop
++ "Delete"   Delete
++ "Close"    Close
++ "Destroy"  Destroy
 
 ####################
 # Window Functions
