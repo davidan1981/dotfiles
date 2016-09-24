@@ -128,6 +128,8 @@ iabbrev  qury         query
 iabbrev  qeury        query
 iabbrev  verison      version
 iabbrev  uesr         user
+iabbrev  fucn         func
+iabbrev  destory      destroy
 " turn off annoying keys. any better way to do this?
 nnoremap <esc>j       <nop>
 nnoremap <esc>k       <nop>

@@ -22,6 +22,7 @@
 # |                                                                |
 # |                                                                |
 # |________________________________________________________________|
+#
 
 ###############################
 # Set environment variables
@@ -91,7 +92,7 @@ AddToFunc RestartFunction
 ###################################################
 # Desktop settings, keys, and pagers
 ###################################################
-DeskTopSize 3x2
+DeskTopSize 4x2
 EdgeResistance 150 150
 EdgeScroll 100 100
 EdgeThickness 1
@@ -167,7 +168,7 @@ ColormapFocus FollowsMouse
 # main pop-up menus
 Mouse 1  R      A        Menu Fvwm2-Actions Nop
 Mouse 2  R      A        Menu Other-Logins Nop
-Mouse 3  R      A        Menu RootMenu Nop
+Mouse 3  R      A        Menu ApplicationMenu Nop
 # title bar buttons
 Mouse 0  1      A        Menu Window-Ops Nop
 Mouse 0  2      A        Maximize-Func
@@ -182,32 +183,53 @@ Mouse 3  TSIF   A        RaiseLower
 # raise or lower window with alt-mousebutton1
 Mouse 1  W      M        Move-or-Raise
 
+DestroyMenu Fvwm2-Actions
 AddToMenu Fvwm2-Actions  "Fvwm2 Actions"  Title   
 + "Refresh%mini.refresh.xpm%"  Exec  exec xrefresh &
 + "Move%mini.move.xpm%"        Move-or-Raise2
 + "Destroy%mini.destroy.xpm%"  Destroy
 + "Delete%mini.delete.xpm%"    Delete   
 + ""    Nop
++ "Active Windows%mini.windows.xpm%" WindowList
++ ""    Nop
 + "Restart%mini.fvwm.xpm%"     Restart /usr/local/bin/fvwm2
 + ""    Nop
 + ""    Nop
 + "Quit%mini.exit.xpm%"        Quit  
 
-AddToMenu RootMenu  "Root Menu"  Title      
-+ "Applications%mini.window2.xpm%"    Popup Applications
-+ "X Utilities%mini.x.xpm%"           Popup XUtilities
+DestroyMenu ApplicationMenu
+AddToMenu ApplicationMenu  "Application Menu"  Title      
++ "Internet%mini.nscape.xpm%"        Popup Internet
++ "Productivity%mini.chart.xpm%"     Popup Productivity
++ "Development%mini.hammer.xpm%"     Popup Development
++ "Graphics%mini.paint2.xpm%"        Popup Graphics
++ "Games%mini.xboing.xpm%"           Popup Games
++ "X Utilities%mini.x.xpm%"          Popup XUtilities
 + ""    Nop
-+ "Settings%mini.penguin.xpm%"        Exec  exec /usr/bin/unity-control-center &
-+ "Build Wallpapers"                  BuildWallPaperMenu
-+ "Wallpaper"                         Popup FvwmWallpaperMenu
++ "Settings%mini.rainbow.xpm%"       Popup Settings
 + ""    Nop
-+ "Active Windows%mini.windows.xpm%"  WindowList
 + ""    Nop
 + "Power%mini.crosbone.xpm%"         Popup Power
 
+DestroyMenu Games
+AddToMenu Games "Games" Title
++ "Steam"         Exec exec /usr/bin/steam &
++ "Mahjongg"      Exec exec /usr/games/gnome-mahjongg &
++ "OpenTTD"       Exec exec /usr/games/openttd &
+
+DestroyMenu Settings
+AddToMenu Settings "Settings" Title
++ "Unity Settings%mini.gnome.xpm%"   Exec  exec /usr/bin/unity-control-center &
++ "Build Wallpapers"                 BuildWallPaperMenu
++ "Select Wallpaper"                 Popup FvwmWallpaperMenu
+
 DestroyMenu Power
 AddToMenu Power "Power" Title
-+ "Suspend" Exec exec gksudo pm-suspend
++ "Suspend%mini.monitor.xpm%"  Exec exec gksudo pm-suspend 
++ ""    Nop
++ "Restart%mini.turn.xpm%"     Exec exec gksudo reboot
++ ""    Nop
++ "Shutdown%mini.cross.xpm%"   Exec exec gksudo shutdown -h now
 
 
 DestroyMenu XUtilities
@@ -244,13 +266,6 @@ AddToMenu Graphics "Graphics" Title
 + "Gimp%mini.gimp.xpm%"       Exec  exec /usr/bin/gimp &
 + "XPaint%mini.xpaint.xpm%"   Exec  exec /usr/bin/xpaint &
 + "Darktable"                 Exec  exec /usr/bin/darktable &
-
-DestroyMenu Applications
-AddToMenu Applications "Applications" Title
-+ "Internet%mini.nscape.xpm%"       Popup Internet
-+ "Productivity%mini.chart.xpm%"    Popup Productivity
-+ "Development%mini.hammer.xpm%"    Popup Development
-+ "Graphics%mini.paint2.xpm%"       Popup Graphics
 
 DestroyMenu Window-Ops
 AddToMenu Window-Ops  "This Window"  Title
@@ -302,21 +317,21 @@ AddToFunc Iconify-and-Raise     "I" Iconify
 *FvwmButtonsBack $[fvwm_back]
 *FvwmButtonsFore black
 *FvwmButtonsFont 6x10
-*FvwmButtonsGeometry 360x60-0+0
+*FvwmButtonsGeometry 420x60-0+0
 *FvwmButtonsRows 1
 *FvwmButtonsBoxSize dumb
 *FvwmButtonsFrame 1
-*FvwmButtons(Icon programs.xpm, Action 'Menu RootMenu')
+*FvwmButtons(Icon programs.xpm, Action 'Menu ApplicationMenu')
 *FvwmButtons: (Container(rows 2, columns 2, Frame1))
-  *FvwmButtons(1x1 Icon mini.directory.xpm, Action 'Exec "rox-filer" rox-filer &')
+  *FvwmButtons(1x1 Icon mini.filemgr.xpm, Action 'Exec "rox-filer" rox-filer &')
   *FvwmButtons(1x1 Icon mini.camera.xpm, Action 'Exec "screengrab" screengrab &')
   *FvwmButtons(1x1 Icon mini.term.xpm, Action 'Exec urxvt &')
-  *FvwmButtons(1x1 Icon mini.penguin.xpm, Action 'Exec unity-control-center &')
+  *FvwmButtons(1x1 Icon mini.rainbow.xpm, Action 'Exec unity-control-center &')
 *FvwmButtons: (End)
 *FvwmButtons(Swallow XLoad 'Exec xload -bg $[fvwm_back] -fg black -fn 6x10 &')
 *FvwmButtons(Swallow XClock 'Exec xclock -bg $[fvwm_back] -update 1 &')
 *FvwmButtons(Swallow(Hints,NoTitle) dclock `Exec exec  dclock  -date "%b %d" -thickness 0.5 -noblink -led_off rgb:80/70/80 -slope 90 -nomiltime -bg $[fvwm_back] -fg 'black' -fn 6x10`)
-*FvwmButtons(Swallow(NoTitle) "FvwmPager" "Module FvwmPager 0 0")
+*FvwmButtons(2x1 Swallow(NoTitle) "FvwmPager" "Module FvwmPager 0 0")
 
 ##############
 # Window list
