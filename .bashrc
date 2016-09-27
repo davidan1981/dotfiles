@@ -87,7 +87,7 @@ parse_git_branch() {
 # Host specific prompt configuration
 #######################################
 case "$HOSTNAME" in
-rearden*)
+rearden*|danconia-vm)
   if [ "$color_prompt" = yes ]; then
       PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]$(parse_git_branch)\[\033[00m\]\$ '
   else
@@ -105,7 +105,7 @@ rearden*)
   esac
   ;;
 
-danconia*)
+danconia.local)
   export LSCOLORS="gxfxhxhxbxhxhxbxhxgxgx"
   export PS1='\u@\h:\W$(parse_git_branch)\[\033[00m\]$ ' 
   ;;
@@ -168,13 +168,13 @@ export PATH="$PATH:~/bin:~/.local/bin"
 # Host specific exports and aliases
 #######################################
 case "$HOSTNAME" in
-rearden*)
+rearden*|danconia-vm)
   export PATH="$PATH:~/.odrive-agent/bin"
   export PATH="$HOME/.rbenv/bin:$PATH"
   export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
   export RBENV_ROOT=~/.rbenv
 ;;
-danconia*)
+danconia.local)
   export RBENV_ROOT="/usr/local/rbenv"
   export PATH="$PATH:/usr/local/rbenv/bin:/usr/local/rbenv/shims:/usr/local/rbenv/plugins/ruby-build/bin"
   alias ls='ls -G'

@@ -39,6 +39,7 @@ SetEnv fvwm_term /usr/bin/urxvt
 SetEnv fvwm_hilight #4169E1
 SetEnv fvwm_back azure4
 SetEnv fvwm_window_font -*-fixed-*-*-*-*-*-*-*-*-*-80-*-*
+SetEnv fvwm_menu_font -*-fixed-medium-r-*-*-*-*-*-*-*-80-*-*
 
 #########
 # Paths
@@ -56,6 +57,8 @@ WindowFont       $[fvwm_window_font]
 HilightColor white  $[fvwm_hilight]
 Emulate Mwm
 MenuStyle Mwm
+MenuStyle * PopupOffset 0 100
+MenuStyle * Font $[fvwm_menu_font]
 SnapGrid 3 3
 Style "*"           MWMFunctions, MwmBorder, MwmButtons, MwmDecor
 Style "*"           DecorateTransient, NoPPosition
