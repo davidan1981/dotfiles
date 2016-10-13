@@ -1,0 +1,24 @@
+source "gpg -d ~/.mutt/credentials.gpg |"
+set realname = "David An"
+set use_from = yes
+set envelope_from = yes
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
+set ssl_force_tls = yes
+set postponed = "+[Gmail]/Drafts"
+set record = "+[Gmail]/Sent Mail"
+set header_cache =~/.mutt/cache/headers
+set message_cachedir =~/.mutt/cache/bodies
+set certificate_file =~/.mutt/certificates
+bind editor <space> noop
+macro index ,, "<imap-fetch-mail>" "Fetch mail"
+macro index ,i "<change-folder>=INBOX<enter>" 'Go to inbox'
+macro index ,a "<change-folder>=[Gmail]/All Mail<enter>" 'Go to all mail'
+macro index ,s "<change-folder>=[Gmail]/Sent Mail<enter>" 'Go to Sent Mail'
+macro index ,d "<change-folder>=[Gmail]/Drafts<enter>" 'Go to drafts'
+macro index ,f "<sync-mailbox>y" 'Force sync mailbox'
+set editor = "vim"
+# unset record
+set move = no
+set charset = "utf-8"
+set imap_keepalive = 900
