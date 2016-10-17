@@ -204,7 +204,7 @@ if has("gui_running")
   colorscheme davidan_white
   " set guifont=PT\ Mono:h14
 else
-  colorscheme davidan_white
+  colorscheme davidan
   let g:NERDTreeDirArrows=0 " uncomment when no support for unicode
 end
 

@@ -28,12 +28,12 @@ hi PreProc      ctermfg=Lightgray ctermbg=none         cterm=bold      term=bold
 hi Scrollbar    ctermfg=Blue      ctermbg=none
 hi Cursor       ctermfg=white     ctermbg=none
 hi ErrorMsg     ctermfg=Red       ctermbg=none         cterm=bold      term=bold
-hi WarningMsg   ctermfg=Yellow    ctermbg=none
+hi WarningMsg   ctermfg=DarkYellow    ctermbg=none
 hi VertSplit    ctermfg=23        ctermbg=23
 hi Directory    ctermfg=Cyan      ctermbg=DarkBlue
 hi Visual       ctermfg=White     ctermbg=DarkGray 
 hi Title        ctermfg=White     ctermbg=DarkBlue
-hi Search       ctermfg=Black     ctermbg=Yellow
+hi Search       ctermfg=Black     ctermbg=DarkYellow
 hi StatusLine   term=bold         cterm=bold,underline ctermfg=Yellow ctermbg=23
 hi StatusLineNC term=bold         cterm=bold,underline ctermfg=White ctermbg=23
 hi LineNr       term=bold         cterm=bold           ctermfg=23   ctermbg=none

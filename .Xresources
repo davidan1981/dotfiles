@@ -19,11 +19,11 @@ aterm*saveLines:32767
 aterm*font: -*-terminal-medium-r-*-*-*-*-*-*-*-110-iso8859-*
 aterm*boldFont: -*-terminal-medium-r-*-*-*-*-*-*-*-110-iso8859-*
 
-URxvt*background: #C3C3C3
-URxvt*foreground: Black
-URxvt*transparent: false
-URxvt*inheritPixmap: false
-!! URxvt*shading: 20
+URxvt*background: Black
+URxvt*foreground: White
+URxvt*transparent: true
+URxvt*inheritPixmap: true
+URxvt*shading: 20
 !!URxvt*geometry: 236x74
 !! Fonts
 !!URxvt*font: -*-terminal-medium-r-*-*-*-*-*-*-*-110-iso8859-*
@@ -54,3 +54,4 @@ URxvt*thickness: 14
 URxvt*scrollstyle: next
 URxvt*saveLines: 10000
 URxvt*smartresize: false
+URxvt.cursorBlink: 1
