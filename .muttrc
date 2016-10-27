@@ -1,4 +1,4 @@
-source "gpg -d ~/.mutt/credentials_work.gpg |"
+source "gpg -d ~/.mutt/credentials.gpg |"
 set smtp_authenticators = 'gssapi:login'
 set realname = "David An"
 set use_from = yes
