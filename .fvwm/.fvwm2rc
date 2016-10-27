@@ -95,7 +95,7 @@ AddToFunc RestartFunction
 ###################################################
 # Desktop settings, keys, and pagers
 ###################################################
-DeskTopSize 4x2
+DeskTopSize 3x2
 EdgeResistance 150 150
 EdgeScroll 100 100
 EdgeThickness 1
@@ -226,6 +226,7 @@ AddToMenu Games "Games" Title
 DestroyMenu Settings
 AddToMenu Settings "Settings" Title
 + "Unity Settings%mini.gnome.xpm%"   Exec  exec /usr/bin/unity-control-center &
++ "Volume Control%mini.audiovol.xpm%" Exec exec /usr/bin/pavucontrol &
 + "Build Wallpapers"                 BuildWallPaperMenu
 + "Select Wallpaper"                 Popup FvwmWallpaperMenu
 
@@ -332,7 +333,7 @@ AddToFunc Iconify-and-Raise     "I" Iconify
   *FvwmButtons(1x1 Icon mini.filemgr.xpm, Action 'Exec "rox-filer" rox-filer &')
   *FvwmButtons(1x1 Icon mini.camera.xpm, Action 'Exec "screengrab" screengrab &')
   *FvwmButtons(1x1 Icon mini.term.xpm, Action 'Exec urxvt &')
-  *FvwmButtons(1x1 Icon mini.rainbow.xpm, Action 'Exec unity-control-center &')
+  *FvwmButtons(1x1 Icon mini.audiovol.xpm, Action 'Exec pavucontrol &')
 *FvwmButtons: (End)
 *FvwmButtons(Swallow XLoad 'Exec xload -bg $[fvwm_back] -fg black -fn 6x10 &')
 *FvwmButtons(Swallow XClock 'Exec xclock -bg $[fvwm_back] -update 1 &')

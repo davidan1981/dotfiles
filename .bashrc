@@ -164,7 +164,8 @@ alias pbpaste='xclip -selection clipboard -o'
 ##################
 # Global exports
 ##################
-export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
+export GOPATH="$HOME/work"
+export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$GOPATH/bin"
 
 #######################################
 # Host specific exports and aliases
