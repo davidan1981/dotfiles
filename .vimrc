@@ -32,6 +32,7 @@ execute pathogen#infect()
 syntax on
 filetype on
 filetype plugin on
+" set shellcmdflag=-ic
 set enc=utf-8
 set backspace=2
 set laststatus=2
@@ -124,6 +125,9 @@ iabbrev  waht         what
 iabbrev  tehn         then
 iabbrev  tempalte     template
 iabbrev  acount       account
+iabbrev  accuont      account
+iabbrev  Acount       Account
+iabbrev  Accuont      Account
 iabbrev  qury         query
 iabbrev  qeury        query
 iabbrev  verison      version

@@ -197,8 +197,12 @@ AddToMenu Fvwm2-Actions  "Fvwm2 Actions"  Title
 + ""    Nop
 + "Restart%mini.fvwm.xpm%"     Restart /usr/local/bin/fvwm2
 + ""    Nop
-+ ""    Nop
-+ "Quit%mini.exit.xpm%"        Quit  
++ "Quit%mini.exit.xpm%"        Popup ConfirmQuit
+
+DestroyMenu ConfirmQuit
+AddToMenu ConfirmQuit "Really Quit?" Title
++ "No%mini.stop.xpm%"          Nop
++ "Yes%mini.exit.xpm%"         Quit
 
 DestroyMenu ApplicationMenu
 AddToMenu ApplicationMenu  "Application Menu"  Title      
@@ -210,7 +214,6 @@ AddToMenu ApplicationMenu  "Application Menu"  Title
 + "X Utilities%mini.x.xpm%"          Popup XUtilities
 + ""    Nop
 + "Settings%mini.rainbow.xpm%"       Popup Settings
-+ ""    Nop
 + ""    Nop
 + "Power%mini.crosbone.xpm%"         Popup Power
 
@@ -333,7 +336,7 @@ AddToFunc Iconify-and-Raise     "I" Iconify
 *FvwmButtons: (End)
 *FvwmButtons(Swallow XLoad 'Exec xload -bg $[fvwm_back] -fg black -fn 6x10 &')
 *FvwmButtons(Swallow XClock 'Exec xclock -bg $[fvwm_back] -update 1 &')
-*FvwmButtons(Swallow(Hints,NoTitle) dclock `Exec exec  dclock  -date "%b %d" -thickness 0.5 -noblink -led_off rgb:80/70/80 -slope 90 -nomiltime -bg $[fvwm_back] -fg 'black' -fn 6x10`)
+*FvwmButtons(Swallow(Hints,NoTitle) dclock `Exec exec  dclock  -date "%m/%d %a" -thickness 0.5 -noblink -led_off rgb:80/70/80 -slope 90 -nomiltime -bg $[fvwm_back] -fg 'black' -fn 6x10`)
 *FvwmButtons(2x1 Swallow(NoTitle) "FvwmPager" "Module FvwmPager 0 0")
 
 ##############

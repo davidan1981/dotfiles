@@ -158,18 +158,20 @@ alias mkdir='mkdir -pv'
 alias ll='ls -FGlAhp'
 alias less='less -FSRXc'
 alias be='bundle exec'
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
 
 ##################
 # Global exports
 ##################
-export PATH="$PATH:~/bin:~/.local/bin"
+export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
 
 #######################################
 # Host specific exports and aliases
 #######################################
 case "$HOSTNAME" in
 rearden*|danconia-vm)
-  export PATH="$PATH:~/.odrive-agent/bin"
+  export PATH="$PATH:$HOME/.odrive-agent/bin"
   export PATH="$HOME/.rbenv/bin:$PATH"
   export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
   export RBENV_ROOT=~/.rbenv
