@@ -232,11 +232,11 @@ AddToMenu Settings "Settings" Title
 
 DestroyMenu Power
 AddToMenu Power "Power" Title
-+ "Suspend%mini.monitor.xpm%"  Exec exec gksudo pm-suspend 
++ "Suspend%mini.monitor.xpm%"  Exec exec gksudo /usr/sbin/pm-suspend  &
 + ""    Nop
-+ "Restart%mini.turn.xpm%"     Exec exec gksudo reboot
++ "Restart%mini.turn.xpm%"     Exec exec gksudo /sbin/reboot &
 + ""    Nop
-+ "Shutdown%mini.cross.xpm%"   Exec exec gksudo shutdown -h now
++ "Shutdown%mini.cross.xpm%"   Exec exec gksudo '/sbin/shutdown -h 0' &
 
 
 DestroyMenu XUtilities
