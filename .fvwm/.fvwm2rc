@@ -38,7 +38,7 @@ SetEnv fvwm_webbrowser /usr/bin/chromium-browswer
 SetEnv fvwm_term /usr/bin/urxvt
 SetEnv fvwm_hilight #4169E1
 SetEnv fvwm_back azure4
-SetEnv fvwm_window_font -*-fixed-*-*-*-*-*-*-*-*-*-80-*-*
+SetEnv fvwm_window_font -adobe-helvetica-*-*-*-*-*-*-*-*-*-56-*-*
 SetEnv fvwm_menu_font -*-fixed-medium-r-*-*-*-*-*-*-*-80-*-*
 
 #########
@@ -65,6 +65,7 @@ Style "*"           DecorateTransient, NoPPosition
 Style "*"           FocusFollowsMouse, MouseFocusClickRaises
 Style "*"           ActivePlacement, RandomPlacement
 Style "*"           IconBox +100 +15 -15 -15, IconFill top left
+Style "*"           BorderWidth 3, HandleWidth 3
 Style "Fvwm*"       NoTitle,  Sticky, WindowListSkip
 Style "Fvwm*"       CirculateSkipIcon, CirculateSkip
 Style "FvwmPager"   NoTitle, Sticky, WindowListSkip
