@@ -111,6 +111,8 @@ nnoremap <leader>ev   :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv   :source $MYVIMRC<cr>
 nnoremap <leader>"    viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>'    viw<esc>a'<esc>hbi'<esc>lel
+nnoremap <leader>p    :set spell spelllang=en_us<CR>
+nnoremap <leader>P    :set nospell<CR>
 inoremap #            X<c-h>#
 inoremap jk           <esc>
 inoremap jj           <esc>

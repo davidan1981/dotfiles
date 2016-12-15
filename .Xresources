@@ -28,8 +28,8 @@ URxvt*shading: 20
 !! Fonts
 !!URxvt*font: -*-terminal-medium-r-*-*-*-*-*-*-*-110-iso8859-*
 !!URxvt*boldFont: -*-terminal-medium-r-*-*-*-*-*-*-*-110-iso8859-*
-URxvt*font: 8x13, xft:NanumGothicCoding
-URxvt*boldfont: 8x13B, xft:NanumGothicCoding
+URxvt*font: 9x15, xft:NanumGothicCoding
+URxvt*boldfont: 9x15B, xft:NanumGothicCoding
 URxvt.perl-ext-common: default,matcher,tabbed,font-size
 URxvt.url-launcher: google-chrome
 URxvt.keysym.M-Up:     perl:font-size:increase
