@@ -80,14 +80,14 @@ fi
 # Show git branch name
 #######################
 parse_git_branch() {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/'
 }
 
 #######################################
 # Host specific prompt configuration
 #######################################
 case "$HOSTNAME" in
-rearden*|danconia-vm)
+rearden*)
   if [ "$color_prompt" = yes ]; then
       PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]$(parse_git_branch)\[\033[00m\]\$ '
   else
@@ -105,9 +105,11 @@ rearden*|danconia-vm)
   esac
   ;;
 
-danconia.local)
-  export LSCOLORS="gxfxhxhxbxhxhxbxhxgxgx"
-  export PS1='\u@\h:\W$(parse_git_branch)\[\033[00m\]$ ' 
+dagny*)
+  export CLICOLOR=1
+  # export LSCOLORS="gxfxhxhxbxhxhxbxhxgxgx"
+  export LSCOLORS=gxfxcxdxbxegedabagacad
+  export PS1='\[\033[32m\]\u\[\033[m\]@\[\033[35m\]\h:\[\033[33m\]\W\[\033[31m\]$(parse_git_branch)\[\033[m\]$ ' 
   ;;
   
 esac
@@ -171,16 +173,21 @@ export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$GOPATH/bin"
 # Host specific exports and aliases
 #######################################
 case "$HOSTNAME" in
-rearden*|danconia-vm)
+rearden*)
   export PATH="$PATH:$HOME/.odrive-agent/bin"
   export PATH="$HOME/.rbenv/bin:$PATH"
   export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
   export RBENV_ROOT=~/.rbenv
 ;;
-danconia.local)
-  export RBENV_ROOT="/usr/local/rbenv"
-  export PATH="$PATH:/usr/local/rbenv/bin:/usr/local/rbenv/shims:/usr/local/rbenv/plugins/ruby-build/bin"
+dagny*)
+  # export RBENV_ROOT="/usr/local/rbenv"
+  # export PATH="$PATH:/usr/local/rbenv/bin:/usr/local/rbenv/shims:/usr/local/rbenv/plugins/ruby-build/bin"
+  export NVM_DIR="$HOME/.nvm"
+  . "/usr/local/opt/nvm/nvm.sh"
   alias ls='ls -G'
+  export WORKON_HOME=~/Envs
+  source /usr/local/bin/virtualenvwrapper.sh
+  export GAE_LIB_ROOT=/Users/davidan/google-cloud-sdk/platform/google_appengine
 ;;
 esac
 
@@ -199,3 +206,9 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/davidan/google-cloud-sdk/path.bash.inc' ]; then source '/Users/davidan/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/davidan/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/davidan/google-cloud-sdk/completion.bash.inc'; fi
