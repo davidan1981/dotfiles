@@ -44,13 +44,14 @@ set shiftwidth=2
 set expandtab
 set smartindent
 set autoindent
-set textwidth=76
+set textwidth=120  " be modern
 set incsearch
 set hlsearch
 set title
 set number
 set mouse=a
 set fillchars=vert:\ 
+set pastetoggle=<F2>
 let g:vim_markdown_folding_disabled=1
 
 fun! TrimWhitespace()
@@ -165,7 +166,6 @@ augroup filetype_ocaml
 augroup END
 augroup filetype_ruby
     autocmd!
-    autocmd FileType     *.erb       setlocal textwidth=255
     autocmd FileType     ruby        nnoremap <buffer> <localleader>c I# <esc>
     autocmd FileType     ruby        nnoremap <buffer> <localleader>u I<esc>lxx
     autocmd BufWritePre  *.rb        call TrimWhitespace()
@@ -184,7 +184,6 @@ augroup filetype_js
 augroup END
 augroup filetype_vim
     autocmd!
-    autocmd FileType     vim,conf    setlocal textwidth=255
     autocmd FileType     vim,conf    setlocal tabstop=4 shiftwidth=4
 augroup END
 augroup filetype_python

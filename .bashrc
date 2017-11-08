@@ -162,6 +162,7 @@ alias less='less -FSRXc'
 alias be='bundle exec'
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+alias pyc='find . -name "*.pyc" -exec rm -f {} \;'  # cleanup all pyc files
 
 ##################
 # Global exports
@@ -178,23 +179,33 @@ rearden*)
   export PATH="$HOME/.rbenv/bin:$PATH"
   export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
   export RBENV_ROOT=~/.rbenv
+  eval "$(rbenv init -)"
 ;;
 dagny*)
   # export RBENV_ROOT="/usr/local/rbenv"
+  # eval "$(rbenv init -)"
   # export PATH="$PATH:/usr/local/rbenv/bin:/usr/local/rbenv/shims:/usr/local/rbenv/plugins/ruby-build/bin"
   export NVM_DIR="$HOME/.nvm"
   . "/usr/local/opt/nvm/nvm.sh"
   alias ls='ls -G'
   export WORKON_HOME=~/Envs
   source /usr/local/bin/virtualenvwrapper.sh
-  export GAE_LIB_ROOT=/Users/davidan/google-cloud-sdk/platform/google_appengine
+  export GAE_LIB_ROOT=/Users/davidan/google-cloud-sdk/platform/google_appengine 
+  export PATH=$PATH:/usr/local/share/google/google-cloud-sdk/bin/
+  export PYTHONPATH="$PYTHONPATH:$GAE_LIB_ROOT"
+  export GAE_PYTHONPATH="$GAE_PYTHONPATH:$GAE_LIB_ROOT"
+
+  # The next line updates PATH for the Google Cloud SDK.
+  if [ -f '/Users/davidan/google-cloud-sdk/path.bash.inc' ]; then source '/Users/davidan/google-cloud-sdk/path.bash.inc'; fi
+
+  # The next line enables shell command completion for gcloud.
+  if [ -f '/Users/davidan/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/davidan/google-cloud-sdk/completion.bash.inc'; fi
 ;;
 esac
 
 ##############
 # Misc
 ##############
-eval "$(rbenv init -)"
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -206,9 +217,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/davidan/google-cloud-sdk/path.bash.inc' ]; then source '/Users/davidan/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/davidan/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/davidan/google-cloud-sdk/completion.bash.inc'; fi
