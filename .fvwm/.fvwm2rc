@@ -23,6 +23,8 @@
 # |                                                                |
 # |________________________________________________________________|
 #
+# For 4k monitors
+#
 
 ###############################
 # Set environment variables
@@ -36,10 +38,11 @@ SetEnv fvwm_script $./scripts
 SetEnv fvwm_wallpapers $[FVWM_USERDIR]/wallpapers
 SetEnv fvwm_webbrowser /usr/bin/chromium-browswer
 SetEnv fvwm_term /usr/bin/urxvt
-SetEnv fvwm_hilight #4169E1
-SetEnv fvwm_back azure4
-SetEnv fvwm_window_font -adobe-helvetica-*-*-*-*-*-*-*-*-*-56-*-*
-SetEnv fvwm_menu_font -*-fixed-medium-r-*-*-*-*-*-*-*-80-*-*
+SetEnv fvwm_background #574c8f
+SetEnv fvwm_back #aeb2c3
+SetEnv fvwm_hilight #b24d7a
+SetEnv fvwm_window_font -*-helvetica-*-r-*-*-20-*-*-*-*-*-*-*
+SetEnv fvwm_menu_font -*-helvetica-*-r-*-*-20-*-*-*-*-*-*-*
 
 #########
 # Paths
@@ -60,18 +63,20 @@ MenuStyle Mwm
 MenuStyle * PopupOffset 0 100
 MenuStyle * Font $[fvwm_menu_font]
 SnapGrid 3 3
+Style "*"           ForeColor black
+Style "*"           BackColor $[fvwm_back]
 Style "*"           MWMFunctions, MwmBorder, MwmButtons, MwmDecor
 Style "*"           DecorateTransient, NoPPosition
 Style "*"           FocusFollowsMouse, MouseFocusClickRaises
 Style "*"           ActivePlacement, RandomPlacement
 Style "*"           IconBox +100 +15 -15 -15, IconFill top left
-Style "*"           BorderWidth 3, HandleWidth 3
+Style "*"           BorderWidth 9, HandleWidth 9
 Style "Fvwm*"       NoTitle,  Sticky, WindowListSkip
 Style "Fvwm*"       CirculateSkipIcon, CirculateSkip
 Style "FvwmPager"   NoTitle, Sticky, WindowListSkip
 Style "FvwmButtons" NoTitle, Sticky, WindowListSkip
 Style "FvwmButtons" CirculateSkip
-Style "FvwmButtons" ClickToFocus, BorderWidth 0, HandleWidth 0
+Style "FvwmButtons" ClickToFocus, BorderWidth 9, HandleWidth 9
 Style "*clock"      NoTitle, NoHandles, Sticky, WindowListSkip
 Style "xbiff"       NoTitle, Sticky, WindowListSkip
 Style "xbuffy"      NoTitle, Sticky
@@ -79,6 +84,7 @@ Style "xcalc"       RandomPlacement
 Style "xman"        RandomPlacement
 Style "xterm"       Icon xterm.xpm
 Style "urxvt"       Icon term.xpm
+Style "Slack"       Icon slack.png
 
 ##############################
 # Initialization and restart
@@ -139,26 +145,18 @@ AddToFunc   FuncSelectWindow
 DestroyFunc BuildWallPaperMenu
 AddToFunc   BuildWallPaperMenu
 + I Exec rm $[fvwm_icons]/wallpapers/*
-+ I PipeRead 'for i in $[fvwm_wallpapers]/*.png; \
-  do convert -scale 64 $i \
-  "$[fvwm_icons]/wallpapers/`basename $i`"; done && echo Nop'
++ I PipeRead 'for i in $[fvwm_wallpapers]/*.jpg; do convert -scale 64 $i "$[fvwm_icons]/wallpapers/`basename $i`"; done && echo Nop'
 + I Exec rm $[FVWM_USERDIR]/WallpaperMenu
-+ I Exec echo "DestroyMenu FvwmWallpaperMenu" > \
-  $[FVWM_USERDIR]/WallpaperMenu
-+ I Exec echo "AddToMenu FvwmWallpaperMenu \"Wallpapers\" Title" >> \
-  $[FVWM_USERDIR]/WallpaperMenu
-+ I PipeRead 'for i in $[fvwm_wallpapers]/*.png; \
-  do echo "AddToMenu FvwmWallpaperMenu \
-  \"`basename $i`%$[fvwm_icons]/wallpapers/`basename $i`%\" \
-  FvwmChangeBackground \"`basename $i`\"" \
-  >> $[FVWM_USERDIR]/WallpaperMenu; done && echo Nop'
++ I Exec echo "DestroyMenu FvwmWallpaperMenu" > $[FVWM_USERDIR]/WallpaperMenu
++ I Exec echo "AddToMenu FvwmWallpaperMenu \"Wallpapers\" Title" >> $[FVWM_USERDIR]/WallpaperMenu
++ I PipeRead 'for i in $[fvwm_wallpapers]/*.jpg; do echo "AddToMenu FvwmWallpaperMenu \"`basename $i`%$[fvwm_icons]/wallpapers/`basename $i`%\" \
+  FvwmChangeBackground \"`basename $i`\"" >> $[FVWM_USERDIR]/WallpaperMenu; done && echo Nop'
 + I Read $[FVWM_USERDIR]/WallpaperMenu
 
 DestroyFunc FvwmChangeBackground
 AddToFunc   FvwmChangeBackground
 + I Exec exec feh --bg-fill $[fvwm_wallpapers]/$0
-+ I Exec echo "feh --bg-fill \
-  $[fvwm_wallpapers]/$0" > $[FVWM_USERDIR]/cfg/background.cfg
++ I Exec echo "feh --bg-fill $[fvwm_wallpapers]/$0" > $[FVWM_USERDIR]/cfg/background.cfg
 
 DestroyFunc InitWallpaper
 AddToFunc   InitWallpaper
@@ -249,7 +247,7 @@ AddToMenu XUtilities "X Utilities" Title
 
 DestroyMenu Internet
 AddToMenu Internet "Internet" Title
-+ "Chrome"                    Exec  exec /usr/bin/chromium-browser &
++ "Chromium"                  Exec  exec /usr/bin/chromium-browser &
 + "Firefox"                   Exec  exec /usr/bin/firefox &
 
 DestroyMenu Development
@@ -265,9 +263,9 @@ AddToMenu Development "Development" Title
 
 DestroyMenu Productivity
 AddToMenu Productivity "Productivity" Title
++ "Slack"      Exec  exec /usr/bin/slack &
 + "HipChat4"   Exec  exec /usr/local/bin/hipchat4 &
 + "Zoom"       Exec  exec /usr/bin/zoom &
-+ "Slack"      Exec  exec /usr/bin/slack &
 
 DestroyMenu Graphics
 AddToMenu Graphics "Graphics" Title
@@ -324,21 +322,23 @@ AddToFunc Iconify-and-Raise     "I" Iconify
 #############
 *FvwmButtonsBack $[fvwm_back]
 *FvwmButtonsFore black
-*FvwmButtonsFont 6x10
-*FvwmButtonsGeometry 420x60-0+0
+*FvwmButtonsFont 10x20
+*FvwmButtonsGeometry 940x120-0+0
 *FvwmButtonsRows 1
 *FvwmButtonsBoxSize dumb
-*FvwmButtonsFrame 1
-*FvwmButtons(Icon programs.xpm, Action 'Menu ApplicationMenu')
-*FvwmButtons: (Container(rows 2, columns 2, Frame1))
-  *FvwmButtons(1x1 Icon mini.filemgr.xpm, Action 'Exec "rox-filer" rox-filer &')
-  *FvwmButtons(1x1 Icon mini.camera.xpm, Action 'Exec "screengrab" screengrab &')
-  *FvwmButtons(1x1 Icon mini.term.xpm, Action 'Exec urxvt &')
-  *FvwmButtons(1x1 Icon mini.audiovol.xpm, Action 'Exec pavucontrol &')
+*FvwmButtonsFrame 2
+*FvwmButtons(Icon menu.xpm, Action 'Menu ApplicationMenu')
+*FvwmButtons: (2x1 Container(rows 2, columns 3, Frame2))
+  *FvwmButtons(1x1 Icon Xfm.xpm, Action 'Exec "xfe" xfe &')
+  *FvwmButtons(1x1 Icon screengrab.png, Action 'Exec "screengrab" screengrab &')
+  *FvwmButtons(1x1 Icon nscape.xpm, Action 'Exec "chromium-browser" chromium-browser &')
+  *FvwmButtons(1x1 Icon xterm.xpm, Action 'Exec "xterm" xterm &')
+  *FvwmButtons(1x1 Icon rterm.xpm, Action 'Exec urxvt &')
+  *FvwmButtons(1x1 Icon bell.xpm, Action 'Exec pavucontrol &')
 *FvwmButtons: (End)
-*FvwmButtons(Swallow XLoad 'Exec xload -bg $[fvwm_back] -fg black -fn 6x10 &')
-*FvwmButtons(Swallow XClock 'Exec xclock -bg $[fvwm_back] -update 1 &')
-*FvwmButtons(Swallow(Hints,NoTitle) dclock `Exec exec  dclock  -date "%m/%d %a" -thickness 0.5 -noblink -led_off rgb:80/70/80 -slope 90 -nomiltime -bg $[fvwm_back] -fg 'black' -fn 6x10`)
+*FvwmButtons(Swallow XLoad 'Exec xload -bg "$[fvwm_back]" -fg black -fn 6x10 &')
+*FvwmButtons(Swallow XClock 'Exec xclock -bg "$[fvwm_back]" -update 1 &')
+*FvwmButtons(Swallow(Hints,NoTitle) dclock `Exec exec  dclock  -date "%m/%d %a" -thickness 0.5 -noblink -led_off rgb:99/99/99 -slope 90 -nomiltime -bg '$[fvwm_back]' -fg 'black' -fn 6x10`)
 *FvwmButtons(2x1 Swallow(NoTitle) "FvwmPager" "Module FvwmPager 0 0")
 
 ##############
@@ -356,3 +356,5 @@ AddToFunc Iconify-and-Raise     "I" Iconify
 *FvwmIconBox            "Fvwm*"         -
 Key Escape  A  C  WindowList
 Key F1 A N Exec exec /usr/local/bin/xlock -mode dclock -mono -nice 10
+
+OpaqueMoveSize 0
