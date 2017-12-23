@@ -67,67 +67,62 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
     else
-	color_prompt=
+        color_prompt=
     fi
 fi
 
 #######################
 # Show git branch name
 #######################
-parse_git_branch() {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/'
+parse_git_branch() { 
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/' 
 }
 
 #######################################
-# Host specific prompt configuration
+# OS specific configuration
 #######################################
-case "$HOSTNAME" in
-rearden*)
-  if [ "$color_prompt" = yes ]; then
-      PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]$(parse_git_branch)\[\033[00m\]\$ '
-  else
-      PS1='${debian_chroot:+($debian_chroot)}\u@\h:\W$(parse_git_branch)\$ '
-  fi
-  unset color_prompt force_color_prompt
+case "$OSTYPE" in
+linux*)
+    if [ "$color_prompt" = yes ]; then
+        PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]$(parse_git_branch)\[\033[00m\]\$ '
+    else
+        PS1='${debian_chroot:+($debian_chroot)}\u@\h:\W$(parse_git_branch)\$ '
+    fi
+    unset color_prompt force_color_prompt
 
-  # If this is an xterm set the title to user@host:dir
-  case "$TERM" in
-  xterm*|rxvt*)
-      PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \W$(parse_git_branch)\a\]$PS1"
-      ;;
-  *)
-      ;;
-  esac
-  ;;
+    # If this is an xterm set the title to user@host:dir
+    case "$TERM" in
+    xterm*|rxvt*)
+        PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \W$(parse_git_branch)\a\]$PS1"
+        ;;
+    *)
+        ;;
+    esac
 
-dagny*)
-  export CLICOLOR=1
-  # export LSCOLORS="gxfxhxhxbxhxhxbxhxgxgx"
-  export LSCOLORS=gxfxcxdxbxegedabagacad
-  export PS1='\[\033[32m\]\u\[\033[m\]@\[\033[35m\]\h:\[\033[33m\]\W\[\033[31m\]$(parse_git_branch)\[\033[m\]$ ' 
-  ;;
+    # enable color support of ls and also add handy aliases
+    if [ -x /usr/bin/dircolors ]; then
+        test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+        alias ls='ls --color=auto'
+        alias grep='grep --color=auto'
+        alias fgrep='fgrep --color=auto'
+        alias egrep='egrep --color=auto'
+    fi
+    ;;
+
+darwin*)
+    alias ls='ls -G'
+    export CLICOLOR=1
+    # export LSCOLORS="gxfxhxhxbxhxhxbxhxgxgx"
+    export LSCOLORS=gxfxcxdxbxegedabagacad
+    export PS1='\[\033[32m\]\u\[\033[m\]@\[\033[35m\]\h:\[\033[33m\]\W\[\033[31m\]$(parse_git_branch)\[\033[m\]$ ' 
+    ;;
   
 esac
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 ####################
 # Global aliases
@@ -175,42 +170,41 @@ export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$GOPATH/bin"
 #######################################
 case "$HOSTNAME" in
 rearden*)
-  export PATH="$PATH:$HOME/.odrive-agent/bin"
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-  export RBENV_ROOT=~/.rbenv
-  eval "$(rbenv init -)"
-  # The next line updates PATH for the Google Cloud SDK.
-  if [ -f '/home/davidan/google-cloud-sdk/path.bash.inc' ]; then source '/home/davidan/google-cloud-sdk/path.bash.inc'; fi
+    export PATH="$PATH:$HOME/.odrive-agent/bin"
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+    export RBENV_ROOT=~/.rbenv
+    eval "$(rbenv init -)"
+    # The next line updates PATH for the Google Cloud SDK.
+    if [ -f '/home/davidan/google-cloud-sdk/path.bash.inc' ]; then source '/home/davidan/google-cloud-sdk/path.bash.inc'; fi
 
-  # The next line enables shell command completion for gcloud.
-  if [ -f '/home/davidan/google-cloud-sdk/completion.bash.inc' ]; then source '/home/davidan/google-cloud-sdk/completion.bash.inc'; fi
+    # The next line enables shell command completion for gcloud.
+    if [ -f '/home/davidan/google-cloud-sdk/completion.bash.inc' ]; then source '/home/davidan/google-cloud-sdk/completion.bash.inc'; fi
 
-  export GAE_LIB_ROOT=~/google-cloud-sdk/platform/google_appengine
-  export PYTHONPATH="$PYTHONPATH:$GAE_LIB_ROOT"
-  export GAE_PYTHONPATH="$GAE_PYTHONPATH:$GAE_LIB_ROOT"
+    export GAE_LIB_ROOT=~/google-cloud-sdk/platform/google_appengine
+    export PYTHONPATH="$PYTHONPATH:$GAE_LIB_ROOT"
+    export GAE_PYTHONPATH="$GAE_PYTHONPATH:$GAE_LIB_ROOT"
 
-  source /usr/local/bin/virtualenvwrapper.sh
+    source /usr/local/bin/virtualenvwrapper.sh
 ;;
 dagny*)
-  # export RBENV_ROOT="/usr/local/rbenv"
-  # eval "$(rbenv init -)"
-  # export PATH="$PATH:/usr/local/rbenv/bin:/usr/local/rbenv/shims:/usr/local/rbenv/plugins/ruby-build/bin"
-  export NVM_DIR="$HOME/.nvm"
-  . "/usr/local/opt/nvm/nvm.sh"
-  alias ls='ls -G'
-  export WORKON_HOME=~/Envs
-  source /usr/local/bin/virtualenvwrapper.sh
-  export GAE_LIB_ROOT=/Users/davidan/google-cloud-sdk/platform/google_appengine 
-  export PATH=$PATH:/usr/local/share/google/google-cloud-sdk/bin/
-  export PYTHONPATH="$PYTHONPATH:$GAE_LIB_ROOT"
-  export GAE_PYTHONPATH="$GAE_PYTHONPATH:$GAE_LIB_ROOT"
+    # export RBENV_ROOT="/usr/local/rbenv"
+    # eval "$(rbenv init -)"
+    # export PATH="$PATH:/usr/local/rbenv/bin:/usr/local/rbenv/shims:/usr/local/rbenv/plugins/ruby-build/bin"
+    export NVM_DIR="$HOME/.nvm"
+    . "/usr/local/opt/nvm/nvm.sh"
+    export WORKON_HOME=~/Envs
+    source /usr/local/bin/virtualenvwrapper.sh
+    export GAE_LIB_ROOT=/Users/davidan/google-cloud-sdk/platform/google_appengine 
+    export PATH=$PATH:/usr/local/share/google/google-cloud-sdk/bin/
+    export PYTHONPATH="$PYTHONPATH:$GAE_LIB_ROOT"
+    export GAE_PYTHONPATH="$GAE_PYTHONPATH:$GAE_LIB_ROOT"
 
-  # The next line updates PATH for the Google Cloud SDK.
-  if [ -f '/Users/davidan/google-cloud-sdk/path.bash.inc' ]; then source '/Users/davidan/google-cloud-sdk/path.bash.inc'; fi
+    # The next line updates PATH for the Google Cloud SDK.
+    if [ -f '/Users/davidan/google-cloud-sdk/path.bash.inc' ]; then source '/Users/davidan/google-cloud-sdk/path.bash.inc'; fi
 
-  # The next line enables shell command completion for gcloud.
-  if [ -f '/Users/davidan/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/davidan/google-cloud-sdk/completion.bash.inc'; fi
+    # The next line enables shell command completion for gcloud.
+    if [ -f '/Users/davidan/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/davidan/google-cloud-sdk/completion.bash.inc'; fi
 ;;
 esac
 
