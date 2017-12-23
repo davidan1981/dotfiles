@@ -180,6 +180,17 @@ rearden*)
   export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
   export RBENV_ROOT=~/.rbenv
   eval "$(rbenv init -)"
+  # The next line updates PATH for the Google Cloud SDK.
+  if [ -f '/home/davidan/google-cloud-sdk/path.bash.inc' ]; then source '/home/davidan/google-cloud-sdk/path.bash.inc'; fi
+
+  # The next line enables shell command completion for gcloud.
+  if [ -f '/home/davidan/google-cloud-sdk/completion.bash.inc' ]; then source '/home/davidan/google-cloud-sdk/completion.bash.inc'; fi
+
+  export GAE_LIB_ROOT=~/google-cloud-sdk/platform/google_appengine
+  export PYTHONPATH="$PYTHONPATH:$GAE_LIB_ROOT"
+  export GAE_PYTHONPATH="$GAE_PYTHONPATH:$GAE_LIB_ROOT"
+
+  source /usr/local/bin/virtualenvwrapper.sh
 ;;
 dagny*)
   # export RBENV_ROOT="/usr/local/rbenv"
