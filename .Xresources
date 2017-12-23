@@ -1,11 +1,13 @@
 xterm*font: -*-terminal-medium-r-*-*-*-*-*-*-*-110-iso8859-*
 xterm*allowBoldFonts: false
+xterm*background: #2f2f2f
+xterm*foreground: White
 
 XClock.Clock.majorColor:  rgb:0/0/0
-XClock.Clock.minorColor:  rgb:0/0/0
+XClock.Clock.minorColor:  rgb:20/20/20
 XClock.Clock.hourColor:   rgb:0/0/0
 XClock.Clock.minuteColor: rgb:0/0/0
-XClock.Clock.secondColor: rgb:0/0/0
+XClock.Clock.secondColor: rgb:20/20/20
 
 aterm*loginShell:true
 aterm*transparent:false
@@ -19,18 +21,15 @@ aterm*saveLines:32767
 aterm*font: -*-terminal-medium-r-*-*-*-*-*-*-*-110-iso8859-*
 aterm*boldFont: -*-terminal-medium-r-*-*-*-*-*-*-*-110-iso8859-*
 
-URxvt*background: Black
+URxvt*background: #2f2f2f
 URxvt*foreground: White
-URxvt*transparent: true
-URxvt*inheritPixmap: true
-URxvt*shading: 20
+URxvt*transparent: false
+!!URxvt*shading: 30
+!!URxvt*inheritPixmap: true
 !!URxvt*geometry: 236x74
 !! Fonts
-!!URxvt*font: -*-terminal-medium-r-*-*-*-*-*-*-*-110-iso8859-*
-!!URxvt*boldFont: -*-terminal-medium-r-*-*-*-*-*-*-*-110-iso8859-*
-URxvt*font: 9x15, xft:NanumGothicCoding
-URxvt*boldfont: 9x15B, xft:NanumGothicCoding
-URxvt.perl-ext-common: default,matcher,tabbed,font-size
+URxvt*font: -*-terminal-medium-r-*-*-*-*-*-*-*-110-iso8859-*
+URxvt.perl-ext-common: default,matcher,tabbed 
 URxvt.url-launcher: google-chrome
 URxvt.keysym.M-Up:     perl:font-size:increase
 URxvt.keysym.M-Down:   perl:font-size:decrease
