@@ -188,7 +188,7 @@ augroup filetype_vim
 augroup END
 augroup filetype_python
     autocmd!
-    autocmd FileType     python      setlocal tabstop=2 shiftwidth=2
+    autocmd FileType     python      setlocal tabstop=4 shiftwidth=4
     autocmd FileType     python      nnoremap <buffer> <localleader>c I# <esc>
     autocmd FileType     python      nnoremap <buffer> <localleader>u I<esc>lxx
     autocmd FileType     python      iabbrev <buffer> iff if:<cr>pass<up><left>
