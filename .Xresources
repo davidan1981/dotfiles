@@ -29,7 +29,7 @@ URxvt*transparent: false
 !!URxvt*geometry: 236x74
 !! Fonts
 URxvt*font: -*-terminal-medium-r-*-*-*-*-*-*-*-110-iso8859-*
-URxvt.perl-ext-common: default,matcher,tabbed 
+URxvt.perl-ext-common: default,matcher,tabbed,selection-to-clipboard
 URxvt.url-launcher: google-chrome
 URxvt.keysym.M-Up:     perl:font-size:increase
 URxvt.keysym.M-Down:   perl:font-size:decrease
