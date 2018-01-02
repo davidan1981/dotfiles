@@ -54,6 +54,11 @@ ImagePath $[fvwm_icons]:$[fvwm_icons];.png:$[fvwm_icons];.jpg:$[fvwm_imgs]:$[fvw
 #################
 WindowFont       $[fvwm_window_font]
 
+#################
+# Menu Colorsets
+#################
+Colorset 7 fg Black, bg $[fvwm_back]
+
 ##############################
 # Global styles and options
 ##############################
@@ -62,6 +67,7 @@ Emulate Mwm
 MenuStyle Mwm
 MenuStyle * PopupOffset 0 100
 MenuStyle * Font $[fvwm_menu_font]
+MenuStyle * MenuColorset 7
 SnapGrid 3 3
 Style "*"           ForeColor black
 Style "*"           BackColor $[fvwm_back]
@@ -70,13 +76,13 @@ Style "*"           DecorateTransient, NoPPosition
 Style "*"           FocusFollowsMouse, MouseFocusClickRaises
 Style "*"           ActivePlacement, RandomPlacement
 Style "*"           IconBox +100 +15 -15 -15, IconFill top left
-Style "*"           BorderWidth 9, HandleWidth 9
+Style "*"           BorderWidth 8, HandleWidth 8
 Style "Fvwm*"       NoTitle,  Sticky, WindowListSkip
 Style "Fvwm*"       CirculateSkipIcon, CirculateSkip
 Style "FvwmPager"   NoTitle, Sticky, WindowListSkip
 Style "FvwmButtons" NoTitle, Sticky, WindowListSkip
 Style "FvwmButtons" CirculateSkip
-Style "FvwmButtons" ClickToFocus, BorderWidth 9, HandleWidth 9
+Style "FvwmButtons" ClickToFocus, BorderWidth 8, HandleWidth 8
 Style "*clock"      NoTitle, NoHandles, Sticky, WindowListSkip
 Style "xbiff"       NoTitle, Sticky, WindowListSkip
 Style "xbuffy"      NoTitle, Sticky
@@ -94,6 +100,7 @@ AddToFunc InitFunction
 +       "I" Module FvwmButtons
 +       "I" BuildWallPaperMenu
 +       "I" InitWallpaper
++       "I" Exec exec feh --bg-tile $[fvwm_wallpapers]/default.png
 
 AddToFunc RestartFunction 
 +       "I" Module FvwmButtons
@@ -102,7 +109,7 @@ AddToFunc RestartFunction
 ###################################################
 # Desktop settings, keys, and pagers
 ###################################################
-DeskTopSize 3x2
+DeskTopSize 2x2
 EdgeResistance 150 150
 EdgeScroll 100 100
 EdgeThickness 1
@@ -196,10 +203,10 @@ AddToMenu Fvwm2-Actions  "Fvwm2 Actions"  Title
 + ""    Nop
 + "Restart%mini.fvwm.xpm%"     Restart /usr/local/bin/fvwm2
 + ""    Nop
-+ "Quit%mini.exit.xpm%"        Popup ConfirmQuit
++ "Quit Session%mini.exit.xpm%"        Popup ConfirmQuit
 
 DestroyMenu ConfirmQuit
-AddToMenu ConfirmQuit "Really Quit?" Title
+AddToMenu ConfirmQuit "Really Quit This Session?" Title
 + "No%mini.stop.xpm%"          Nop
 + "Yes%mini.exit.xpm%"         Quit
 
@@ -224,13 +231,14 @@ AddToMenu Games "Games" Title
 
 DestroyMenu Settings
 AddToMenu Settings "Settings" Title
-+ "Unity Settings%mini.gnome.xpm%"   Exec  exec /usr/bin/unity-control-center &
 + "Volume Control%mini.audiovol.xpm%" Exec exec /usr/bin/pavucontrol &
 + "Build Wallpapers"                 BuildWallPaperMenu
 + "Select Wallpaper"                 Popup FvwmWallpaperMenu
 
 DestroyMenu Power
 AddToMenu Power "Power" Title
++ "Quit Session%mini.exit.xpm%"        Popup ConfirmQuit
++ ""    Nop
 + "Suspend%mini.monitor.xpm%"  Exec exec gksudo /usr/sbin/pm-suspend  &
 + ""    Nop
 + "Restart%mini.turn.xpm%"     Exec exec gksudo /sbin/reboot &
@@ -323,23 +331,26 @@ AddToFunc Iconify-and-Raise     "I" Iconify
 *FvwmButtonsBack $[fvwm_back]
 *FvwmButtonsFore black
 *FvwmButtonsFont 10x20
-*FvwmButtonsGeometry 940x120-0+0
+*FvwmButtonsGeometry 960x120-0+0
 *FvwmButtonsRows 1
 *FvwmButtonsBoxSize dumb
 *FvwmButtonsFrame 2
 *FvwmButtons(Icon menu.xpm, Action 'Menu ApplicationMenu')
-*FvwmButtons: (2x1 Container(rows 2, columns 3, Frame2))
+*FvwmButtons: (2x1 Container(rows 2, columns 4, Frame2))
   *FvwmButtons(1x1 Icon Xfm.xpm, Action 'Exec "xfe" xfe &')
   *FvwmButtons(1x1 Icon screengrab.png, Action 'Exec "screengrab" screengrab &')
-  *FvwmButtons(1x1 Icon nscape.xpm, Action 'Exec "chromium-browser" chromium-browser &')
+  *FvwmButtons(1x1 Icon chromium-browser.png, Action 'Exec "chromium-browser" chromium-browser &')
+  *FvwmButtons(1x1 Icon nscape.xpm, Action 'Exec "firefox" firefox --private-window &')
+  *FvwmButtons(1x1 Icon darktable.png, Action 'Exec "darktable" darktable &')
   *FvwmButtons(1x1 Icon xterm.xpm, Action 'Exec "xterm" xterm &')
   *FvwmButtons(1x1 Icon rterm.xpm, Action 'Exec urxvt &')
   *FvwmButtons(1x1 Icon bell.xpm, Action 'Exec pavucontrol &')
 *FvwmButtons: (End)
-*FvwmButtons(Swallow XLoad 'Exec xload -bg "$[fvwm_back]" -fg black -fn 6x10 &')
+*FvwmButtons(Swallow XLoad 'Exec xload -bg "$[fvwm_back]" -fg black -fn 6x8 &')
 *FvwmButtons(Swallow XClock 'Exec xclock -bg "$[fvwm_back]" -update 1 &')
-*FvwmButtons(Swallow(Hints,NoTitle) dclock `Exec exec  dclock  -date "%m/%d %a" -thickness 0.5 -noblink -led_off rgb:99/99/99 -slope 90 -nomiltime -bg '$[fvwm_back]' -fg 'black' -fn 6x10`)
-*FvwmButtons(2x1 Swallow(NoTitle) "FvwmPager" "Module FvwmPager 0 0")
+*FvwmButtons(Swallow(Hints,NoTitle) dclock `Exec exec  dclock  -date "%m/%d %a" -thickness 0.5 -noblink -led_off rgb:99/99/99 -slope 90 -nomiltime -bg '$[fvwm_back]' -fg 'black' -fn 6x8`)
+*FvwmButtons(1x1 Swallow(NoTitle) "FvwmPager" "Module FvwmPager 0 0")
+*FvwmButtons(Icon exit.xpm, Action 'Menu Power')
 
 ##############
 # Window list
