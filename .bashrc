@@ -174,6 +174,10 @@ rearden*)
     export PATH="$HOME/.rbenv/bin:$PATH"
     export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
     export RBENV_ROOT=~/.rbenv
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"    
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+    [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
     eval "$(rbenv init -)"
     # The next line updates PATH for the Google Cloud SDK.
     if [ -f '/home/davidan/google-cloud-sdk/path.bash.inc' ]; then source '/home/davidan/google-cloud-sdk/path.bash.inc'; fi
@@ -193,6 +197,7 @@ dagny*)
     # export PATH="$PATH:/usr/local/rbenv/bin:/usr/local/rbenv/shims:/usr/local/rbenv/plugins/ruby-build/bin"
     export NVM_DIR="$HOME/.nvm"
     . "/usr/local/opt/nvm/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
     export WORKON_HOME=~/Envs
     source /usr/local/bin/virtualenvwrapper.sh
     export GAE_LIB_ROOT=/Users/davidan/google-cloud-sdk/platform/google_appengine 
