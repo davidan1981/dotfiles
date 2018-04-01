@@ -211,6 +211,12 @@ dagny*)
     # The next line enables shell command completion for gcloud.
     if [ -f '/Users/davidan/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/davidan/google-cloud-sdk/completion.bash.inc'; fi
 ;;
+family*)
+    export PATH=/usr/local/bin:$PATH
+    export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+    export WORKON_HOME=~/Envs
+    source /usr/local/bin/virtualenvwrapper.sh
+;;
 esac
 
 ##############
