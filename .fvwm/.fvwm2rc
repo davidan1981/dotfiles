@@ -23,8 +23,6 @@
 # |                                                                |
 # |________________________________________________________________|
 #
-# For 4k monitors
-#
 
 ###############################
 # Set environment variables
@@ -41,8 +39,8 @@ SetEnv fvwm_term /usr/bin/urxvt
 SetEnv fvwm_background #574c8f
 SetEnv fvwm_back #aeb2c3
 SetEnv fvwm_hilight #b24d7a
-SetEnv fvwm_window_font -*-helvetica-*-r-*-*-20-*-*-*-*-*-*-*
-SetEnv fvwm_menu_font -*-helvetica-*-r-*-*-20-*-*-*-*-*-*-*
+SetEnv fvwm_window_font -*-terminus-*-r-*-*-*-180-*-*-*-*-*-*
+SetEnv fvwm_menu_font -*-terminus-*-r-*-*-*-180-*-*-*-*-*-*
 
 #########
 # Paths
@@ -76,13 +74,13 @@ Style "*"           DecorateTransient, NoPPosition
 Style "*"           FocusFollowsMouse, MouseFocusClickRaises
 Style "*"           ActivePlacement, RandomPlacement
 Style "*"           IconBox +100 +15 -15 -15, IconFill top left
-Style "*"           BorderWidth 8, HandleWidth 8
+Style "*"           BorderWidth 6, HandleWidth 6
 Style "Fvwm*"       NoTitle,  Sticky, WindowListSkip
 Style "Fvwm*"       CirculateSkipIcon, CirculateSkip
 Style "FvwmPager"   NoTitle, Sticky, WindowListSkip
 Style "FvwmButtons" NoTitle, Sticky, WindowListSkip
 Style "FvwmButtons" CirculateSkip
-Style "FvwmButtons" ClickToFocus, BorderWidth 8, HandleWidth 8
+Style "FvwmButtons" ClickToFocus, BorderWidth 6, HandleWidth 6
 Style "*clock"      NoTitle, NoHandles, Sticky, WindowListSkip
 Style "xbiff"       NoTitle, Sticky, WindowListSkip
 Style "xbuffy"      NoTitle, Sticky
@@ -90,7 +88,6 @@ Style "xcalc"       RandomPlacement
 Style "xman"        RandomPlacement
 Style "xterm"       Icon xterm.xpm
 Style "urxvt"       Icon term.xpm
-Style "Slack"       Icon slack.png
 
 ##############################
 # Initialization and restart
@@ -214,21 +211,12 @@ AddToMenu ConfirmQuit "Really Quit This Session?" Title
 DestroyMenu ApplicationMenu
 AddToMenu ApplicationMenu  "Application Menu"  Title      
 + "Internet%mini.nscape.xpm%"        Popup Internet
-+ "Productivity%mini.chart.xpm%"     Popup Productivity
-+ "Development%mini.hammer.xpm%"     Popup Development
-+ "Graphics%mini.paint2.xpm%"        Popup Graphics
-+ "Games%mini.xboing.xpm%"           Popup Games
++ "Tools%mini.hammer.xpm%"           Popup Tools
 + "X Utilities%mini.x.xpm%"          Popup XUtilities
 + ""    Nop
 + "Settings%mini.rainbow.xpm%"       Popup Settings
 + ""    Nop
 + "Power%mini.crosbone.xpm%"         Popup Power
-
-DestroyMenu Games
-AddToMenu Games "Games" Title
-+ "Steam"         Exec exec /usr/bin/steam &
-+ "Mahjongg"      Exec exec /usr/games/gnome-mahjongg &
-+ "OpenTTD"       Exec exec /usr/games/openttd &
 
 DestroyMenu Settings
 AddToMenu Settings "Settings" Title
@@ -240,11 +228,11 @@ DestroyMenu Power
 AddToMenu Power "Power" Title
 + "Quit Session%mini.exit.xpm%"        Popup ConfirmQuit
 + ""    Nop
-+ "Suspend%mini.monitor.xpm%"  Exec exec gksudo /usr/sbin/pm-suspend  &
++ "Suspend%mini.monitor.xpm%"  Exec exec xterm -e 'sudo /usr/sbin/pm-suspend'  &
 + ""    Nop
-+ "Restart%mini.turn.xpm%"     Exec exec gksudo /sbin/reboot &
++ "Restart%mini.turn.xpm%"     Exec exec xterm -e 'sudo /sbin/reboot' &
 + ""    Nop
-+ "Shutdown%mini.cross.xpm%"   Exec exec gksudo '/sbin/shutdown -h 0' &
++ "Shutdown%mini.cross.xpm%"   Exec exec xterm -e 'sudo /sbin/shutdown -h 0' &
 
 
 DestroyMenu XUtilities
@@ -256,31 +244,15 @@ AddToMenu XUtilities "X Utilities" Title
 
 DestroyMenu Internet
 AddToMenu Internet "Internet" Title
-+ "Chromium"                  Exec  exec /usr/bin/chromium-browser &
++ "Chrome"                  Exec  exec /usr/bin/google-chrome  &
 + "Firefox"                   Exec  exec /usr/bin/firefox &
 
-DestroyMenu Development
-AddToMenu Development "Development" Title
+DestroyMenu Tools
+AddToMenu Tools "Tools" Title
 + "urxvt%mini.term.xpm%"         Exec  exec /usr/bin/urxvt &
 + "xterm%mini.xterm.xpm%"        Exec  exec /usr/bin/xterm &
-+ "aterm%mini.term2.xpm%"        Exec  exec /usr/bin/aterm &
 + ""    Nop
-+ "GVim%mini.gvim.png%"          Exec  exec /usr/bin/gvim &
-+ "Eclipse"                      Exec  exec /usr/bin/eclipse &
-+ ""    Nop
-+ "VirtualBox%mini.desktop.xpm%" Exec  exec /usr/bin/virtualbox &
-
-DestroyMenu Productivity
-AddToMenu Productivity "Productivity" Title
-+ "Slack"      Exec  exec /usr/bin/slack &
-+ "HipChat4"   Exec  exec /usr/local/bin/hipchat4 &
-+ "Zoom"       Exec  exec /usr/bin/zoom &
-
-DestroyMenu Graphics
-AddToMenu Graphics "Graphics" Title
-+ "Gimp%mini.gimp.xpm%"       Exec  exec /usr/bin/gimp &
-+ "XPaint%mini.xpaint.xpm%"   Exec  exec /usr/bin/xpaint &
-+ "Darktable"                 Exec  exec /usr/bin/darktable &
++ "VirtualManager"               Exec  exec xterm -e 'sudo /usr/bin/virt-manager' &
 
 DestroyMenu Window-Ops
 AddToMenu Window-Ops  "This Window"  Title
@@ -332,28 +304,13 @@ AddToFunc Iconify-and-Raise     "I" Iconify
 *FvwmButtonsBack $[fvwm_back]
 *FvwmButtonsFore black
 *FvwmButtonsFont 10x20
-*FvwmButtonsGeometry 1080x120+1380-0
+*FvwmButtonsGeometry 240x80+0-0
 *FvwmButtonsRows 1
 *FvwmButtonsBoxSize dumb
-*FvwmButtonsFrame 1
-*FvwmButtons(Icon menu.xpm, Action 'Menu ApplicationMenu')
-*FvwmButtons: (2x1 Container(rows 2, columns 4, Frame 0))
-  *FvwmButtons(1x1 Icon Xfm.xpm, Action 'Exec "xfe" xfe &')
-  *FvwmButtons(1x1 Icon screengrab.png, Action 'Exec "screengrab" screengrab &')
-  *FvwmButtons(1x1 Icon chromium-browser.png, Action 'Exec "chromium-browser" chromium-browser &')
-  *FvwmButtons(1x1 Icon nscape.xpm, Action 'Exec "firefox" firefox --private-window &')
-  *FvwmButtons(1x1 Icon slack.png, Action 'Exec "slack" slack &')
-  *FvwmButtons(1x1 Icon xterm.xpm, Action 'Exec "xterm" xterm &')
-  *FvwmButtons(1x1 Icon rterm.xpm, Action 'Exec urxvt &')
-  *FvwmButtons(1x1 Icon darktable.png, Action 'Exec "darktable" darktable &')
-  *FvwmButtons(1x1 Icon gimp.png, Action 'Exec "gimp" gimp &')
-  *FvwmButtons(1x1 Icon bell.xpm, Action 'Exec pavucontrol &')
-*FvwmButtons: (End)
-*FvwmButtons(Frame 0 Swallow XLoad 'Exec xload -bg "$[fvwm_back]" -fg black -fn 6x8 &')
-*FvwmButtons(Frame 0 Swallow XClock 'Exec xclock -bg "$[fvwm_back]" -update 1 &')
-*FvwmButtons(Swallow(Hints,NoTitle) dclock `Exec exec  dclock  -date "%m/%d %a" -thickness 0.5 -noblink -led_off rgb:99/99/99 -slope 90 -nomiltime -bg '$[fvwm_back]' -fg 'black' -fn 6x8`)
-*FvwmButtons(2x1 Frame 0 Swallow(NoTitle) "FvwmPager" "Module FvwmPager 0 0")
-*FvwmButtons(Icon exit.xpm, Action 'Menu Power')
+*FvwmButtonsFrame 2
+*FvwmButtons(Frame 1 Swallow XLoad 'Exec xload -bg "$[fvwm_back]" -fg black -fn 6x8 &')
+*FvwmButtons(Frame 1 Swallow XClock 'Exec xclock -bg "$[fvwm_back]" -update 1 &')
+*FvwmButtons(Frame 1 Swallow(NoTitle) "FvwmPager" "Module FvwmPager 0 0")
 
 ##############
 # Window list
