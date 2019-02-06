@@ -17,16 +17,32 @@
 #                        \|_________|                            
 #                                                                
 # =================================================================
+
+# function to show progress
+progress() {
+  echo -e '.\c'
+}
+
+# function to show git branch name
+parse_git_branch() { 
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/' 
+}
+
+echo -e 'Loading bashrc...\c'
                                                                
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
+
+progress
 
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
+
+progress
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -45,15 +61,21 @@ shopt -s checkwinsize
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
-#shopt -s globstar
+# shopt -s globstar
+
+progress
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+progress
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
+
+progress
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
@@ -64,6 +86,8 @@ esac
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
 #force_color_prompt=yes
+
+progress
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -76,16 +100,7 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-#######################
-# Show git branch name
-#######################
-parse_git_branch() { 
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/' 
-}
-
-#######################################
 # OS specific configuration
-#######################################
 case "$OSTYPE" in
 linux*)
     if [ "$color_prompt" = yes ]; then
@@ -124,14 +139,7 @@ darwin*)
   
 esac
 
-####################
-# Global aliases
-####################
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+progress
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -146,90 +154,83 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-#############
-# Aliases
-#############
-alias cp='cp -iv'
-alias mv='mv -iv'
-alias mkdir='mkdir -pv'
-alias ll='ls -FGlAhp'
-alias less='less -FSRXc'
-alias be='bundle exec'
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -o'
-alias pyc='find . -name "*.pyc" -exec rm -f {} \;'  # cleanup all pyc files
+progress
 
-##################
-# Global exports
-##################
-export GOPATH="$HOME/work"
-export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$GOPATH/bin"
+# Common path setting
+export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$GOPATH/bin:/usr/local/go/bin"
 
-#######################################
-# Host specific exports and aliases
-#######################################
-case "$HOSTNAME" in
-rearden*)
-    export PATH="$PATH:$HOME/.odrive-agent/bin"
+progress
+
+# Go
+if [ -x "$(command -v go)" ]; then
+    export GOPATH="$HOME/work"
+fi
+
+progress
+
+# rbenv stuff
+if [ -d $HOME/.rbenv ]; then
     export PATH="$HOME/.rbenv/bin:$PATH"
     export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
     export RBENV_ROOT=~/.rbenv
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"    
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-    [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
     eval "$(rbenv init -)"
-    # The next line updates PATH for the Google Cloud SDK.
-    if [ -f '/home/davidan/google-cloud-sdk/path.bash.inc' ]; then source '/home/davidan/google-cloud-sdk/path.bash.inc'; fi
+fi
 
-    # The next line enables shell command completion for gcloud.
-    if [ -f '/home/davidan/google-cloud-sdk/completion.bash.inc' ]; then source '/home/davidan/google-cloud-sdk/completion.bash.inc'; fi
+progress
 
-    export GAE_LIB_ROOT=~/google-cloud-sdk/platform/google_appengine
-    export PYTHONPATH="$PYTHONPATH:$GAE_LIB_ROOT"
+# Google AppEngine
+if [ -d $HOME/google-cloud-sdk/platform/google_appengine ]; then
+    export GAE_LIB_ROOT=$HOME/google-cloud-sdk/platform/google_appengine 
     export GAE_PYTHONPATH="$GAE_PYTHONPATH:$GAE_LIB_ROOT"
+fi
 
-    source /usr/local/bin/virtualenvwrapper.sh
-;;
-dagny*)
-    # export RBENV_ROOT="/usr/local/rbenv"
-    # eval "$(rbenv init -)"
-    # export PATH="$PATH:/usr/local/rbenv/bin:/usr/local/rbenv/shims:/usr/local/rbenv/plugins/ruby-build/bin"
+progress
+
+# Google Cloud SDK
+if [ -d /usr/local/share/google/google-cloud-sdk/bin ]; then
+    export PATH=$PATH:/usr/local/share/google/google-cloud-sdk/bin/
+fi 
+if [ -f $HOME/google-cloud-sdk/path.bash.inc ]; then source $HOME/google-cloud-sdk/path.bash.inc; fi
+if [ -f $HOME/google-cloud-sdk/completion.bash.inc ]; then source $HOME/google-cloud-sdk/completion.bash.inc; fi
+
+progress
+
+# TravisCI
+[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+
+progress
+
+# Pyenv stuff - this is slow
+if [ -x "$(command -v pyenv)" ]; then
+    eval "$(pyenv init -)"
+    if [ -x "$(command -v pyenv-virtualenv)" ]; then
+        eval "$(pyenv virtualenv-init -)"
+        export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+        export WORKON_HOME=~/Envs
+        pyenv virtualenvwrapper
+    fi
+fi
+
+progress
+
+# NVM stuff
+if [ -d $HOME/.nvm ]; then
     export NVM_DIR="$HOME/.nvm"
     . "/usr/local/opt/nvm/nvm.sh"
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-    export WORKON_HOME=~/Envs
-    source /usr/local/bin/virtualenvwrapper.sh
-    export GAE_LIB_ROOT=/Users/davidan/google-cloud-sdk/platform/google_appengine 
-    export PATH=$PATH:/usr/local/share/google/google-cloud-sdk/bin/
-    export PYTHONPATH="$PYTHONPATH:$GAE_LIB_ROOT"
-    export GAE_PYTHONPATH="$GAE_PYTHONPATH:$GAE_LIB_ROOT"
+fi
 
-    # The next line updates PATH for the Google Cloud SDK.
-    if [ -f '/Users/davidan/google-cloud-sdk/path.bash.inc' ]; then source '/Users/davidan/google-cloud-sdk/path.bash.inc'; fi
-
-    # The next line enables shell command completion for gcloud.
-    if [ -f '/Users/davidan/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/davidan/google-cloud-sdk/completion.bash.inc'; fi
-;;
-family*)
-    export PATH=/usr/local/bin:$PATH
-    export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-    export WORKON_HOME=~/Envs
-    source /usr/local/bin/virtualenvwrapper.sh
-;;
-esac
-
-##############
-# Misc
-##############
+progress
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    fi
 fi
+
+echo '.done'

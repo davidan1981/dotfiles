@@ -200,6 +200,9 @@ augroup filetype_python
     autocmd InsertLeave  python      match ExtraWhitespace /\s\+$/
     autocmd BufWritePre  *.py        call TrimWhitespace()
 augroup END
+augroup filetype_make
+    autocmd FileType     make    setlocal noexpandtab
+augroup END
 
 " ================
 " Terminal vs. GUI
@@ -218,6 +221,7 @@ end
 " ================================
 
 " <<<< NERDTree + NERDTreeTabsToggle >>>>
+let NERDTreeIgnore = ['\.pyc$']
 autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 nnoremap <F10>     :NERDTreeTabsToggle<CR>
