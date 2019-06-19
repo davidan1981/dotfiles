@@ -157,7 +157,7 @@ fi
 progress
 
 # Common path setting
-export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$GOPATH/bin:/usr/local/go/bin"
+export PATH="$HOME/.pyenv/bin:$PATH:$HOME/bin:$HOME/.local/bin:$GOPATH/bin:/usr/local/go/bin"
 
 progress
 
@@ -181,14 +181,19 @@ progress
 # Google AppEngine
 if [ -d $HOME/google-cloud-sdk/platform/google_appengine ]; then
     export GAE_LIB_ROOT=$HOME/google-cloud-sdk/platform/google_appengine 
-    export GAE_PYTHONPATH="$GAE_PYTHONPATH:$GAE_LIB_ROOT"
+elif [ -d /usr/lib/google-cloud-sdk/platform/google_appengine ]; then
+    export GAE_LIB_ROOT=/usr/lib/google-cloud-sdk/platform/google_appengine 
 fi
+export GAE_PYTHONPATH="$GAE_PYTHONPATH:$GAE_LIB_ROOT"
 
 progress
 
 # Google Cloud SDK
-if [ -d /usr/local/share/google/google-cloud-sdk/bin ]; then
-    export PATH=$PATH:/usr/local/share/google/google-cloud-sdk/bin/
+if [ -d $HOME/google-cloud-sdk/bin ]; then
+    export PATH=$PATH:$HOME/google-cloud-sdk/bin/
+fi
+if [ -d /usr/lib/google-cloud-sdk/bin ]; then
+    export PATH=$PATH:/usr/lib/google-cloud-sdk/bin/
 fi 
 if [ -f $HOME/google-cloud-sdk/path.bash.inc ]; then source $HOME/google-cloud-sdk/path.bash.inc; fi
 if [ -f $HOME/google-cloud-sdk/completion.bash.inc ]; then source $HOME/google-cloud-sdk/completion.bash.inc; fi
@@ -201,14 +206,15 @@ progress
 progress
 
 # Pyenv stuff - this is slow
+export PYENV_ROOT="$HOME/.pyenv"
 if [ -x "$(command -v pyenv)" ]; then
     eval "$(pyenv init -)"
-    if [ -x "$(command -v pyenv-virtualenv)" ]; then
-        eval "$(pyenv virtualenv-init -)"
-        export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
-        export WORKON_HOME=~/Envs
-        pyenv virtualenvwrapper
-    fi
+    # assume virtualenv is installed
+    eval "$(pyenv virtualenv-init -)"
+    # also assume virtualenvwrapper 
+    export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+    export WORKON_HOME=$HOME/Envs
+    pyenv virtualenvwrapper
 fi
 
 progress
@@ -232,5 +238,8 @@ if ! shopt -oq posix; then
         . /etc/bash_completion
     fi
 fi
+
+# Lastly, see if there is a local rc file
+[ -f $HOME/.bashrc.local ] && source $HOME/.bashrc.local
 
 echo '.done'
