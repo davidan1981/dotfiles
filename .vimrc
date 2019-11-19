@@ -25,6 +25,7 @@
 
 " This will make plugins recognizable easily
 execute pathogen#infect()
+command! -nargs=? -bar -bang Goyo call goyo#execute(<bang>0, <q-args>)
 
 " ====================
 " Basic configurations
@@ -212,6 +213,8 @@ if has("gui_running")
   colorscheme davidan_white
   " set guifont=PT\ Mono:h14
 else
+  let &t_ZH="\e[3m"  " allows italics
+  let &t_ZR="\e[23m"  " allows italics
   colorscheme davidan
   let g:NERDTreeDirArrows=0 " uncomment when no support for unicode
 end
@@ -242,3 +245,4 @@ nnoremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 nnoremap <C-[> :pop<CR>
 
 "autocmd bufenter * if (winnr("$") == 1 && exists("s:displayed_warnings")) | q | endif
+"
