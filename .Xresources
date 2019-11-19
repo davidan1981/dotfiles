@@ -1,4 +1,4 @@
-xterm*font: -*-terminal-medium-r-*-*-*-*-*-*-*-110-iso8859-*
+xterm*font: -*-fixed-*-*-*-*-*-200-*-*-*-*-*-*
 xterm*allowBoldFonts: false
 xterm*background: #2f2f2f
 xterm*foreground: White
@@ -28,8 +28,8 @@ URxvt*transparent: false
 !!URxvt*inheritPixmap: true
 !!URxvt*geometry: 236x74
 !! Fonts
-URxvt*font: -*-terminal-medium-r-*-*-*-*-*-*-*-110-iso8859-*, xft:NanumGothicCoding
-URxvt*boldFont: -*-terminal-medium-r-*-*-*-*-*-*-*-110-iso8859-*, xft:NanumGothicCoding
+URxvt*font: -*-fixed-*-*-*-*-*-200-*-*-*-*-*-*
+URxvt*BoldFont: -*-fixed-*-*-*-*-*-200-*-*-*-*-*-*
 URxvt.perl-ext-common: default,matcher,tabbed,selection-to-clipboard
 URxvt.url-launcher: google-chrome
 URxvt.keysym.M-Up:     perl:font-size:increase
