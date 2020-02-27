@@ -210,11 +210,11 @@ export PYENV_ROOT="$HOME/.pyenv"
 if [ -x "$(command -v pyenv)" ]; then
     eval "$(pyenv init -)"
     # assume virtualenv is installed
-    eval "$(pyenv virtualenv-init -)"
+    # eval "$(pyenv virtualenv-init -)"
     # also assume virtualenvwrapper 
-    export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
-    export WORKON_HOME=$HOME/Envs
-    pyenv virtualenvwrapper
+    # export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+    # export WORKON_HOME=$HOME/Envs
+    # pyenv virtualenvwrapper
 fi
 
 progress

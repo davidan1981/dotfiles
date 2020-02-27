@@ -245,4 +245,5 @@ nnoremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 nnoremap <C-[> :pop<CR>
 
 "autocmd bufenter * if (winnr("$") == 1 && exists("s:displayed_warnings")) | q | endif
-"
+
+let python_highlight_all=1
