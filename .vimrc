@@ -25,7 +25,6 @@
 
 " This will make plugins recognizable easily
 execute pathogen#infect()
-command! -nargs=? -bar -bang Goyo call goyo#execute(<bang>0, <q-args>)
 
 " ====================
 " Basic configurations
