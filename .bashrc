@@ -18,6 +18,12 @@
 #                                                                
 # =================================================================
 
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
 # function to show progress
 progress() {
   echo -e '.\c'
@@ -35,12 +41,6 @@ echo -e 'Loading bashrc...\c'
 # for examples
 
 progress
-
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
 
 progress
 
