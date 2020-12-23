@@ -24,7 +24,7 @@ hi String         ctermfg=Magenta           guifg=#A31515                 gui=NO
 hi Constant	      ctermfg=4           guifg=#0000ff                 gui=NONE    
 hi Error 		  ctermfg=5 ctermbg=4 guifg=#ffffff guibg=#A31515   gui=NONE    
 hi ErrorMsg       ctermfg=5 ctermbg=4 guifg=#ffffff guibg=#A31515   gui=NONE
-hi Search		  ctermfg=2 ctermbg=3 guifg=#ffffff guibg=#335EA8   gui=NONE    
+hi Search		  ctermfg=0 ctermbg=3 guifg=#ffffff guibg=#335EA8   gui=NONE    
 hi Directory      ctermfg=4           guifg=#0000ff                 gui=NONE
 hi Todo           ctermfg=5 ctermbg=4 guifg=#ffffff guibg=#A31515   gui=NONE
 hi Folded         ctermbg=0           guifg=#000000                 gui=NONE

@@ -31,9 +31,10 @@ hi ErrorMsg     ctermfg=Red        ctermbg=none         cterm=bold      term=bol
 hi WarningMsg   ctermfg=DarkYellow ctermbg=none
 hi VertSplit    ctermfg=23         ctermbg=23
 hi Directory    ctermfg=Cyan       ctermbg=DarkBlue
-hi Visual       ctermfg=White      ctermbg=DarkGray 
+hi Visual       ctermfg=Black      ctermbg=DarkBlue
 hi Title        ctermfg=White      ctermbg=DarkBlue
-hi Search       ctermfg=Black      ctermbg=DarkYellow
+hi Search       ctermfg=Black       ctermbg=Yellow      cterm=bold   term=bold
+hi IncSearch    ctermfg=Black       ctermbg=Yellow
 hi StatusLine   term=bold          cterm=bold,underline ctermfg=Yellow ctermbg=23
 hi StatusLineNC term=bold          cterm=bold,underline ctermfg=White ctermbg=23
 hi LineNr       term=bold          cterm=bold           ctermfg=23   ctermbg=none

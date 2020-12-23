@@ -181,6 +181,7 @@ augroup filetype_js
     autocmd FileType     javascript  nnoremap <buffer> <localleader>u I<esc>lxxx
     autocmd FileType     javascript  setlocal tabstop=2 shiftwidth=2
     autocmd BufWritePre  javascript  call TrimWhitespace()
+    autocmd BufWritePre  *.js  call TrimWhitespace()
 augroup END
 augroup filetype_vim
     autocmd!
@@ -203,18 +204,24 @@ augroup END
 augroup filetype_make
     autocmd FileType     make    setlocal noexpandtab
 augroup END
+augroup filetype_go
+    autocmd FileType     go    setlocal tabstop=4 shiftwidth=4
+    autocmd BufWritePre  *.go        call TrimWhitespace()
+augroup END
 
 " ================
 " Terminal vs. GUI
 " ================
 " I just like having GUI vim possibly with a different theme.
 if has("gui_running")
-  colorscheme davidan_white
+  " colorscheme davidan_white
+  colorscheme davidan
   " set guifont=PT\ Mono:h14
 else
   let &t_ZH="\e[3m"  " allows italics
   let &t_ZR="\e[23m"  " allows italics
-  colorscheme davidan
+  colorscheme davidan_white
+  " colorscheme davidan
   let g:NERDTreeDirArrows=0 " uncomment when no support for unicode
 end
 
