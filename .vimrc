@@ -23,6 +23,19 @@
 "   - Use 'jj' or 'jk' to get out of insert mode. Try best not to use esc.
 " =========================================================================
 
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+Plug 'haishanh/night-owl.vim'
+Plug 'preservim/nerdtree'
+Plug 'https://github.com/jistr/vim-nerdtree-tabs.git'
+Plug 'https://github.com/nvie/vim-flake8.git'
+call plug#end()
+
 " This will make plugins recognizable easily
 execute pathogen#infect()
 
@@ -32,6 +45,8 @@ execute pathogen#infect()
 syntax on
 filetype on
 filetype plugin on
+set path+=**
+set wildmenu
 " set shellcmdflag=-ic
 set enc=utf-8
 set backspace=2
@@ -213,17 +228,16 @@ augroup END
 " Terminal vs. GUI
 " ================
 " I just like having GUI vim possibly with a different theme.
-if has("gui_running")
-  " colorscheme davidan_white
-  colorscheme davidan
-  " set guifont=PT\ Mono:h14
-else
-  let &t_ZH="\e[3m"  " allows italics
-  let &t_ZR="\e[23m"  " allows italics
-  colorscheme davidan_white
-  " colorscheme davidan
-  let g:NERDTreeDirArrows=0 " uncomment when no support for unicode
-end
+
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+let &t_ZH="\e[3m"  " allows italics
+let &t_ZR="\e[23m"  " allows italics
+colorscheme night-owl
+let g:lightline = { 'colorscheme': 'nightowl' }
+let g:NERDTreeDirArrows=0 " uncomment when no support for unicode
 
 " ================================
 " Plugins
@@ -253,3 +267,4 @@ nnoremap <C-[> :pop<CR>
 "autocmd bufenter * if (winnr("$") == 1 && exists("s:displayed_warnings")) | q | endif
 
 let python_highlight_all=1
+
