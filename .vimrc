@@ -1,58 +1,78 @@
-" =========================================================================
-"                                       
-"  ________  ________  ___      ___ ___  ________  ________      
-" |\   ___ \|\   __  \|\  \    /  /|\  \|\   ___ \|\   ____\     
-" \ \  \_|\ \ \  \|\  \ \  \  /  / | \  \ \  \_|\ \ \  \___|_    
-"  \ \  \ \\ \ \   __  \ \  \/  / / \ \  \ \  \ \\ \ \_____  \   
-"   \ \  \_\\ \ \  \ \  \ \    / /   \ \  \ \  \_\\ \|____|\  \  
-"    \ \_______\ \__\ \__\ \__/ /     \ \__\ \_______\____\_\  \ 
-"     \|_______|\|__|\|__|\|__|/       \|__|\|_______|\_________\
-"                                                    \|_________|
-"  ___      ___ ___  _____ ______                                
-" |\  \    /  /|\  \|\   _ \  _   \                              
-" \ \  \  /  / | \  \ \  \\\__\ \  \                             
-"  \ \  \/  / / \ \  \ \  \\|__| \  \                            
-"   \ \    / /   \ \  \ \  \    \ \  \                           
-"    \ \__/ /     \ \__\ \__\    \ \__\                          
-"     \|__|/       \|__|\|__|     \|__|                          
 "
-" =========================================================================
-"   - To reload this resource file, do <leader>sv which is mapped to 
-"     :so $MYVIMRC.
-"   - Use 'z' for navigation. For example, zt opens a new tab.
-"   - Use 'jj' or 'jk' to get out of insert mode. Try best not to use esc.
-" =========================================================================
+"  ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+" ▐░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▌
+"  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+"     ▄               ▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄       ▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄
+"    ▐░▌             ▐░▌▐░░░░░░░░░░░▌▐░░▌     ▐░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+"     ▐░▌           ▐░▌  ▀▀▀▀█░█▀▀▀▀ ▐░▌░▌   ▐░▐░▌▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀▀▀
+"      ▐░▌         ▐░▌       ▐░▌     ▐░▌▐░▌ ▐░▌▐░▌▐░▌       ▐░▌▐░▌
+"       ▐░▌       ▐░▌        ▐░▌     ▐░▌ ▐░▐░▌ ▐░▌▐░█▄▄▄▄▄▄▄█░▌▐░▌
+"        ▐░▌     ▐░▌         ▐░▌     ▐░▌  ▐░▌  ▐░▌▐░░░░░░░░░░░▌▐░▌
+"         ▐░▌   ▐░▌          ▐░▌     ▐░▌   ▀   ▐░▌▐░█▀▀▀▀█░█▀▀ ▐░▌
+"          ▐░▌ ▐░▌           ▐░▌     ▐░▌       ▐░▌▐░▌     ▐░▌  ▐░▌
+"           ▐░▐░▌        ▄▄▄▄█░█▄▄▄▄ ▐░▌       ▐░▌▐░▌      ▐░▌ ▐░█▄▄▄▄▄▄▄▄▄
+"            ▐░▌        ▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌
+"             ▀          ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀  ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀
+"  ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+" ▐░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▌
+"  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+"
+"  This script uses vim-plug to install plug-ins. 
+"    * night-owl
+"    * nerdtree
+"    * vim-flake8
+"
+"  To reload this resource file, do <leader>sv which is mapped to 
+"    :so $MYVIMRC.
+"
+"  Use 'z' for navigation. For example, zt for a new tab zq to close it.
+"  Use 'jj' or 'jk' to get out of insert mode. Try best not to use esc.
+"
+"  Good luck.
+"
+"  ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+" ▐░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▌
+"  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
+" vim-plug
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-
 call plug#begin('~/.vim/plugged')
 Plug 'haishanh/night-owl.vim'
 Plug 'preservim/nerdtree'
-Plug 'https://github.com/jistr/vim-nerdtree-tabs.git'
 Plug 'https://github.com/nvie/vim-flake8.git'
 call plug#end()
+" this will make plugins recognizable easily
+execute pathogen#infect() 
 
-" This will make plugins recognizable easily
-execute pathogen#infect()
+" Functions
 
-" ====================
+fun! TrimWhitespace()
+    " Trim whitespace at the end of each line
+    let l:save_cursor = getpos('.')
+    %s/\s\+$//e
+    call setpos('.', l:save_cursor)
+endfun
+
+fun! ForceCloseTab()
+    " Close nerdtree before closing a tab
+    NERDTreeClose
+    quit
+endfun
+
 " Basic configurations
-" ====================
 syntax on
 filetype on
 filetype plugin on
 set path+=**
 set wildmenu
-" set shellcmdflag=-ic
 set enc=utf-8
 set backspace=2
 set laststatus=2
 set statusline=%F\ %y:\ %l,%v\ of\ %L\ lines
-let NERDTreeStatusline="."
 set history=50
 set tabstop=2
 set shiftwidth=2
@@ -69,51 +89,11 @@ set fillchars=vert:\
 set pastetoggle=<F2>
 let g:vim_markdown_folding_disabled=1
 
-fun! TrimWhitespace()
-    let l:save_cursor = getpos('.')
-    %s/\s\+$//e
-    call setpos('.', l:save_cursor)
-endfun
-
-if exists("+showtabline")
-     function MyTabLine()
-         let s = ''
-         let t = tabpagenr()
-         let i = 1
-         while i <= tabpagenr('$')
-             let buflist = tabpagebuflist(i)
-             let winnr = tabpagewinnr(i)
-             let s .= '%' . i . 'T'
-             let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
-             let s .= ' '
-             let s .= i . ' - '
-             let s .= '%*'
-             let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
-             let file = bufname(buflist[winnr - 1])
-             let file = fnamemodify(file, ':p:t')
-             if file == ''
-                 let file = '[No Name]'
-             endif
-             let s .= file . ' '
-             let i = i + 1
-         endwhile
-         let s .= '%T%#TabLineFill#%='
-         let s .= (tabpagenr('$') > 1 ? '%999XX' : 'X')
-         return s
-     endfunction
-     set stal=2
-     set tabline=%!MyTabLine()
-endif
-
-" =======
 " Leaders
-" =======
 let mapleader=","
-let maplocalleader=","  " use something else if needed
+let maplocalleader=","  
 
-" ============
 " Key mappings
-" ============
 nnoremap <Right>    :tabn<CR>
 nnoremap z<Right>     :tabn<CR>
 nnoremap zl           :tabn<CR>
@@ -122,9 +102,11 @@ nnoremap z<Left>      :tabp<CR>
 nnoremap zh           :tabp<CR>
 nnoremap zt           :tabnew<CR>
 nnoremap zw           :confirm bdelete<CR>
-nnoremap zv           :set paste<cr>:r !pbpaste<cr>:set nopaste<CR>
-nnoremap <leader>ev   :vsplit $MYVIMRC<cr>
-nnoremap <leader>sv   :source $MYVIMRC<cr>
+nnoremap zv           :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+nnoremap zq           :call ForceCloseTab()<CR>
+nnoremap <leader>q    :call ForceCloseTab()<CR>
+nnoremap <leader>ev   :vsplit $MYVIMRC<CR>
+nnoremap <leader>sv   :source $MYVIMRC<CR>
 nnoremap <leader>"    viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>'    viw<esc>a'<esc>hbi'<esc>lel
 nnoremap <leader>p    :set spell spelllang=en_us<CR>
@@ -132,12 +114,12 @@ nnoremap <leader>P    :set nospell<CR>
 inoremap #            X<c-h>#
 inoremap jk           <esc>
 inoremap jj           <esc>
-inoremap jwj          <esc>:w<cr>
-inoremap jwk          <esc>:w<cr>
-vnoremap //           y/<c-r>"<cr>
+inoremap jwj          <esc>:w<CR>
+inoremap jwk          <esc>:w<CR>
+vnoremap //           y/<c-r>"<CR>
 vnoremap <leader>"    <esc>`<i"<esc>`>a"<esc>
 vnoremap <leader>'    <esc>`<i'<esc>`>a'<esc>
-vnoremap zc           <esc>:'<,'>w !pbcopy<cr>
+vnoremap zc           <esc>:'<,'>w !pbcopy<CR>
 iabbrev  adn          and
 iabbrev  waht         what
 iabbrev  tehn         then
@@ -152,7 +134,8 @@ iabbrev  verison      version
 iabbrev  uesr         user
 iabbrev  fucn         func
 iabbrev  destory      destroy
-" turn off annoying keys. any better way to do this?
+
+" Turn off annoying keys. any better way to do this?
 nnoremap <esc>j       <nop>
 nnoremap <esc>k       <nop>
 nnoremap <esc>h       <nop>
@@ -163,14 +146,49 @@ nnoremap <esc>,       <nop>
 nnoremap <esc>z       <nop>
 nnoremap <esc>w       <nop>
 nnoremap <esc>v       <nop>
-nnoremap <esc><cr>    <nop>
+nnoremap <esc><CR>    <nop>
 nnoremap <esc><space> <nop>
-" I'm not sure if there is a better way to do this. And how do I allow paste?
-nnoremap zc           ?^\s*class<cr>:nohlsearch<cr>
 
-" =============
-" Auto commands
-" =============
+" I'm not sure if there is a better way to do this. And how do I allow paste?
+" Only works in mac
+nnoremap zc           ?^\s*class<CR>:nohlsearch<CR>
+
+" Terminal vs. GUI
+if (has("termguicolors"))
+  " I just like having GUI vim possibly with a different theme.
+  set termguicolors
+endif
+
+" Theme-related
+let &t_ZH="\e[3m"  " allows italics
+let &t_ZR="\e[23m"  " allows italics
+colorscheme night-owl
+let g:lightline = { 'colorscheme': 'nightowl' }
+let python_highlight_all=1
+
+" NERDTree
+let NERDTreeStatusline="."
+" let g:NERDTreeDirArrows=0 " uncomment when no support for unicode
+let NERDTreeIgnore = ['\.pyc$']
+nnoremap <F10>     :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeToggle<CR>
+nnoremap zf        :NERDTreeToggle<CR>
+" Mirror the NERDTree before showing it. This makes it the same on all tabs.
+nnoremap <C-n> :NERDTreeMirror<CR>:NERDTreeFocus<CR>
+
+" Ctags
+" You must run ctags -R -o ~/tags ~/src
+" let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Close_On_Select = 1
+let Tlist_Use_Right_Window = 1
+let Tlist_File_Fold_Auto_Close = 1
+set tags=tags;$HOME/.vim/tags/
+nnoremap <F9> :TlistToggle<CR>
+nnoremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+nnoremap <C-[> :pop<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("s:displayed_warnings")) | q | endif
+
+" File type-specific auto commands
 augroup filetype_md
     autocmd!
     autocmd BufNewFile,BufReadPost *.md setlocal filetype=ghmarkdown
@@ -207,7 +225,7 @@ augroup filetype_python
     autocmd FileType     python      setlocal tabstop=4 shiftwidth=4
     autocmd FileType     python      nnoremap <buffer> <localleader>c I# <esc>
     autocmd FileType     python      nnoremap <buffer> <localleader>u I<esc>lxx
-    autocmd FileType     python      iabbrev <buffer> iff if:<cr>pass<up><left>
+    autocmd FileType     python      iabbrev <buffer> iff if:<CR>pass<up><left>
     autocmd BufWritePost *.py        call Flake8()
     autocmd BufUnload    *.py        cclose
     autocmd ColorScheme  python      highlight ExtraWhitespace ctermbg=red guibg=red
@@ -217,54 +235,11 @@ augroup filetype_python
     autocmd BufWritePre  *.py        call TrimWhitespace()
 augroup END
 augroup filetype_make
-    autocmd FileType     make    setlocal noexpandtab
+    autocmd!
+    autocmd FileType     make        setlocal noexpandtab
 augroup END
 augroup filetype_go
-    autocmd FileType     go    setlocal tabstop=4 shiftwidth=4
+    autocmd!
+    autocmd FileType     go          setlocal tabstop=4 shiftwidth=4
     autocmd BufWritePre  *.go        call TrimWhitespace()
 augroup END
-
-" ================
-" Terminal vs. GUI
-" ================
-" I just like having GUI vim possibly with a different theme.
-
-if (has("termguicolors"))
-  set termguicolors
-endif
-
-let &t_ZH="\e[3m"  " allows italics
-let &t_ZR="\e[23m"  " allows italics
-colorscheme night-owl
-let g:lightline = { 'colorscheme': 'nightowl' }
-let g:NERDTreeDirArrows=0 " uncomment when no support for unicode
-
-" ================================
-" Plugins
-" ================================
-
-" <<<< NERDTree + NERDTreeTabsToggle >>>>
-let NERDTreeIgnore = ['\.pyc$']
-autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-nnoremap <F10>     :NERDTreeTabsToggle<CR>
-nnoremap <leader>f :NERDTreeTabsToggle<CR>
-nnoremap zf        :NERDTreeTabsToggle<CR>
-" Close vim if only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" <<<< ctags >>>>
-" You must run ctags -R -o ~/tags ~/src
-let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Close_On_Select = 1
-let Tlist_Use_Right_Window = 1
-let Tlist_File_Fold_Auto_Close = 1
-set tags=tags;$HOME/.vim/tags/
-nnoremap <F9> :TlistToggle<CR>
-nnoremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-nnoremap <C-[> :pop<CR>
-
-"autocmd bufenter * if (winnr("$") == 1 && exists("s:displayed_warnings")) | q | endif
-
-let python_highlight_all=1
-
