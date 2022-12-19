@@ -119,7 +119,12 @@ inoremap jwk          <esc>:w<CR>
 vnoremap //           y/<c-r>"<CR>
 vnoremap <leader>"    <esc>`<i"<esc>`>a"<esc>
 vnoremap <leader>'    <esc>`<i'<esc>`>a'<esc>
-vnoremap zc           <esc>:'<,'>w !pbcopy<CR>
+if has('macunix')
+    vnoremap zc           <esc>:'<,'>w !pbcopy<CR>
+endif
+if has('linux')
+    vnoremap zc           <esc>:'<,'>w !xclip -i -sel c<CR>
+endif
 iabbrev  adn          and
 iabbrev  waht         what
 iabbrev  tehn         then
@@ -148,10 +153,6 @@ nnoremap <esc>w       <nop>
 nnoremap <esc>v       <nop>
 nnoremap <esc><CR>    <nop>
 nnoremap <esc><space> <nop>
-
-" I'm not sure if there is a better way to do this. And how do I allow paste?
-" Only works in mac
-nnoremap zc           ?^\s*class<CR>:nohlsearch<CR>
 
 " Terminal vs. GUI
 if (has("termguicolors"))
