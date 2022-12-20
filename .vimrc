@@ -173,9 +173,10 @@ let NERDTreeStatusline="."
 let NERDTreeIgnore = ['\.pyc$']
 nnoremap <F10>     :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeToggle<CR>
-nnoremap zf        :NERDTreeToggle<CR>
-" Mirror the NERDTree before showing it. This makes it the same on all tabs.
-nnoremap <C-n> :NERDTreeMirror<CR>:NERDTreeFocus<CR>
+nnoremap <leader>g :wincmd p<CR>
+nnoremap zf        :NERDTreeToggle<CR>:wincmd p<CR>
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
 
 " Ctags
 " You must run ctags -R -o ~/tags ~/src
