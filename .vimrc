@@ -180,14 +180,14 @@ nnoremap <C-n> :NERDTreeMirror<CR>:NERDTreeFocus<CR>
 " Ctags
 " You must run ctags -R -o ~/tags ~/src
 " let Tlist_GainFocus_On_ToggleOpen = 1
-let Tlist_Close_On_Select = 1
-let Tlist_Use_Right_Window = 1
-let Tlist_File_Fold_Auto_Close = 1
-set tags=tags;$HOME/.vim/tags/
-nnoremap <F9> :TlistToggle<CR>
-nnoremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-nnoremap <C-[> :pop<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("s:displayed_warnings")) | q | endif
+" let Tlist_Close_On_Select = 1
+" let Tlist_Use_Right_Window = 1
+" let Tlist_File_Fold_Auto_Close = 1
+" set tags=tags;$HOME/.vim/tags/
+" nnoremap <F9> :TlistToggle<CR>
+" nnoremap <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+" nnoremap <C-[> :pop<CR>
+" autocmd bufenter * if (winnr("$") == 1 && exists("s:displayed_warnings")) | q | endif
 
 " File type-specific auto commands
 augroup filetype_md
