@@ -203,7 +203,6 @@ let NERDTreeIgnore = ['\.pyc$']
 nnoremap <F10>     :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeToggle<CR>
 nnoremap <leader>g :wincmd w<CR>
-nnoremap zf        :NERDTreeToggle<CR>:wincmd p<CR>
 " Open the existing NERDTree on each new tab.
 autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
 
