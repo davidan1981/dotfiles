@@ -195,6 +195,7 @@ let &t_ZR="\e[23m"  " allows italics
 colorscheme night-owl
 let g:lightline = { 'colorscheme': 'nightowl' }
 let python_highlight_all=1
+let &t_ut=''  " this fixes vim background redraw in kitty
 
 " NERDTree
 let NERDTreeStatusline="."
