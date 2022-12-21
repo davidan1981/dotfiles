@@ -45,6 +45,7 @@ Plug 'haishanh/night-owl.vim'
 Plug 'preservim/nerdtree'
 Plug 'https://github.com/nvie/vim-flake8.git'
 call plug#end()
+
 " this will make plugins recognizable easily
 execute pathogen#infect() 
 
@@ -94,37 +95,65 @@ let mapleader=","
 let maplocalleader=","  
 
 " Key mappings
+
+" Next tab
 nnoremap <Right>    :tabn<CR>
 nnoremap z<Right>     :tabn<CR>
 nnoremap zl           :tabn<CR>
+
+" Previous tab
 nnoremap <Left>     :tabp<CR>
 nnoremap z<Left>      :tabp<CR>
 nnoremap zh           :tabp<CR>
+
+" New tab
 nnoremap zt           :tabnew<CR>
+
+" Close with a confirmation
 nnoremap zw           :confirm bdelete<CR>
-nnoremap zv           :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+
+" Close tab ignoring Nerdtree
 nnoremap zq           :call ForceCloseTab()<CR>
 nnoremap <leader>q    :call ForceCloseTab()<CR>
+
+" Splits
 nnoremap <leader>ev   :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv   :source $MYVIMRC<CR>
+
+" Quotes
 nnoremap <leader>"    viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>'    viw<esc>a'<esc>hbi'<esc>lel
+
+" Spelling checks
 nnoremap <leader>p    :set spell spelllang=en_us<CR>
 nnoremap <leader>P    :set nospell<CR>
+
+" ??
 inoremap #            X<c-h>#
+
+" Other navigations
 inoremap jk           <esc>
 inoremap jj           <esc>
+
+" Saving
 inoremap jwj          <esc>:w<CR>
 inoremap jwk          <esc>:w<CR>
+
+" Viaual mode stuff
 vnoremap //           y/<c-r>"<CR>
 vnoremap <leader>"    <esc>`<i"<esc>`>a"<esc>
 vnoremap <leader>'    <esc>`<i'<esc>`>a'<esc>
+
+" Copy paste
 if has('macunix')
     vnoremap zc           <esc>:'<,'>w !pbcopy<CR>
 endif
 if has('linux')
     vnoremap zc           <esc>:'<,'>w !xclip -i -sel c<CR>
 endif
+nnoremap zv           :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+
+" Autocorrect
 iabbrev  adn          and
 iabbrev  waht         what
 iabbrev  tehn         then
@@ -173,7 +202,7 @@ let NERDTreeStatusline="."
 let NERDTreeIgnore = ['\.pyc$']
 nnoremap <F10>     :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeToggle<CR>
-nnoremap <leader>g :wincmd p<CR>
+nnoremap <leader>g :wincmd w<CR>
 nnoremap zf        :NERDTreeToggle<CR>:wincmd p<CR>
 " Open the existing NERDTree on each new tab.
 autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif
