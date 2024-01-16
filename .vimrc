@@ -276,3 +276,10 @@ augroup filetype_go
     autocmd FileType     go          setlocal tabstop=4 shiftwidth=4
     autocmd BufWritePre  *.go        call TrimWhitespace()
 augroup END
+
+if &term =~ "screen"                                                   
+    let &t_BE = "\e[?2004h"                                              
+    let &t_BD = "\e[?2004l"                                              
+    exec "set t_PS=\e[200~"                                              
+    exec "set t_PE=\e[201~"                                              
+endif
