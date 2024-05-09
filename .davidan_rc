@@ -54,8 +54,10 @@ fi
 # Node
 if [ -d $HOME/.nvm ]; then
     export NVM_DIR="$HOME/.nvm"
-    . "/usr/local/opt/nvm/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+    if [ -f "/usr/local/opt/nvm/nvm.sh" ]; then
+      . "/usr/local/opt/nvm/nvm.sh"
+      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+    fi
 fi
 
 # Me specific
