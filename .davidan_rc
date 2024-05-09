@@ -78,6 +78,7 @@ alias per='pipenv run'
 alias pes='pipenv shell'
 alias pertest='pipenv run pytest'
 alias pervim='pipenv run vim'
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
 if [ "${TERM}" = "xterm-kitty" ]; then
   alias ssh="kitty +kitten ssh"
