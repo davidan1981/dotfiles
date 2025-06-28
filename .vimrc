@@ -101,12 +101,14 @@ nnoremap <Right>    :tabn<CR>
 nnoremap z<Right>     :tabn<CR>
 nnoremap zl           :tabn<CR>
 nnoremap z.           :tabn<CR>
+nnoremap tl           :tabn<CR>
 
 " Previous tab
 nnoremap <Left>     :tabp<CR>
 nnoremap z<Left>      :tabp<CR>
 nnoremap zh           :tabp<CR>
 nnoremap z,           :tabp<CR>
+nnoremap th           :tabp<CR> 
 
 " New tab
 nnoremap zt           :tabnew<CR>
