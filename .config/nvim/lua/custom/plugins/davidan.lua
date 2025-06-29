@@ -33,7 +33,71 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	end,
 })
 
+-- Create an autocommand group to manage your custom autocommands
+local autocmd_group = vim.api.nvim_create_augroup("Custom auto-commands", { clear = true })
+
+-- Create an autocmd that runs flake8 on Python files after saving
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+	pattern = { "*.py" }, -- Apply to all files with a .py extension
+	desc = "Run flake8 after saving Python files", -- Description for the autocmd
+	group = autocmd_group, -- Assign to the autocmd group
+	callback = function()
+		local file_name = vim.api.nvim_buf_get_name(0) -- Get the current buffer's file name
+		vim.cmd(":! flake8 " .. file_name) -- Execute flake8 on the saved file
+	end,
+})
+
+-- Remove trailing white space for python code
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+	pattern = { "*.py" },
+	command = [[%s/\s\+$//e]],
+})
+
 return {
+	{
+		"xiyaowong/transparent.nvim",
+		version = "*",
+		lazy = false,
+		config = function()
+			require("transparent").setup({
+				-- table: default groups
+				groups = {
+					"Normal",
+					"NormalNC",
+					"Comment",
+					"Constant",
+					"Special",
+					"Identifier",
+					"Statement",
+					"PreProc",
+					"Type",
+					"Underlined",
+					"Todo",
+					"String",
+					"Function",
+					"Conditional",
+					"Repeat",
+					"Operator",
+					"Structure",
+					"LineNr",
+					"NonText",
+					"SignColumn",
+					"CursorLine",
+					"CursorLineNr",
+					"StatusLine",
+					"StatusLineNC",
+					"EndOfBuffer",
+				},
+				-- table: additional groups that should be cleared
+				extra_groups = {},
+				-- table: groups you don't want to clear
+				exclude_groups = {},
+				-- function: code to be executed after highlight groups are cleared
+				-- Also the user event "TransparentClear" will be triggered
+				on_clear = function() end,
+			})
+		end,
+	},
 	-- nvim-tree
 	{
 		"nvim-tree/nvim-tree.lua",
