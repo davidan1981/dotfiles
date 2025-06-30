@@ -47,6 +47,17 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	end,
 })
 
+vim.api.nvim_create_autocmd("TabEnter", {
+	group = vim.api.nvim_create_augroup("NvimTreeOpen", { clear = true }),
+	callback = function()
+		local nvim_tree = require("nvim-tree.view")
+		-- Check if nvim-tree is not already open
+		if not nvim_tree.is_visible() then
+			vim.cmd("NvimTreeOpen")
+		end
+	end,
+})
+
 -- Remove trailing white space for python code
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	pattern = { "*.py" },
@@ -89,7 +100,10 @@ return {
 					"EndOfBuffer",
 				},
 				-- table: additional groups that should be cleared
-				extra_groups = {},
+				extra_groups = {
+					"NormalFloat", -- plugins which have float panel such as Lazy, Mason, LspInfo
+					"NvimTreeNormal", -- NvimTree
+				},
 				-- table: groups you don't want to clear
 				exclude_groups = {},
 				-- function: code to be executed after highlight groups are cleared
