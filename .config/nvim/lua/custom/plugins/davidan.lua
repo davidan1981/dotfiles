@@ -5,6 +5,10 @@ vim.g.loaded_netrwPlugin = 1
 -- optionally enable 24-bit colour
 vim.opt.termguicolors = true
 
+-- other settings
+vim.opt.textwidth = 120
+vim.opt.wrap = true
+
 -- my own key mapping
 vim.keymap.set("n", ",f", ":NvimTreeToggle<CR>")
 vim.keymap.set("n", ",q", ":q!<CR>")
@@ -65,7 +69,29 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 return {
+	-- override mason-lspconfig from the init --
 	{
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = {
+			"neovim/nvim-lspconfig",
+		},
+		config = function()
+			require("mason-lspconfig").setup({
+				ensure_installed = {
+					"lua_ls",
+					"pyright",
+					"ruby_lsp",
+					"ts_ls",
+					"java_language_server",
+					"bashls",
+				},
+				automatic_installation = true,
+			})
+		end,
+	},
+	-- transparent window --
+	{
+		-- Run `:TransparentEnable`
 		"xiyaowong/transparent.nvim",
 		version = "*",
 		lazy = false,
