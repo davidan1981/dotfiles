@@ -51,6 +51,7 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	end,
 })
 
+-- Make sure new tab has nvim-tree open automatically
 vim.api.nvim_create_autocmd("TabEnter", {
 	group = vim.api.nvim_create_augroup("NvimTreeOpen", { clear = true }),
 	callback = function()
@@ -69,9 +70,12 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 return {
-	-- override mason-lspconfig from the init --
+	-- Override mason-lspconfig from the init --
+	-- To see the complete list, run :Mason --
+	-- To see the error logs, run :MasonLog --
 	{
 		"williamboman/mason-lspconfig.nvim",
+		lazy = false,
 		dependencies = {
 			"neovim/nvim-lspconfig",
 		},
@@ -83,7 +87,12 @@ return {
 					"ruby_lsp",
 					"ts_ls",
 					"java_language_server",
+					"kotlin_language_server",
 					"bashls",
+					"html",
+					"cssls",
+					"jinja_lsp",
+					"marksman",
 				},
 				automatic_installation = true,
 			})
