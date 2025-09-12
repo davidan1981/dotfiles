@@ -60,6 +60,16 @@ if [ -d $HOME/.nvm ]; then
     fi
 fi
 
+# Java
+case "$OSTYPE" in
+linux*)
+    ;;
+darwin*)
+    export JAVA_HOME="/opt/homebrew/opt/openjdk"
+    export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+    ;;
+esac
+
 # Me specific
 export TACOBAR_ENV=dev
 
@@ -85,3 +95,5 @@ alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 if [ "${TERM}" = "xterm-kitty" ]; then
   alias ssh="kitty +kitten ssh"
 fi
+
+echo -ne '\e[1 q'
