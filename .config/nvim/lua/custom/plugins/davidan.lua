@@ -9,21 +9,20 @@ vim.opt.termguicolors = true
 vim.opt.textwidth = 120
 vim.opt.wrap = true
 
+-- highlight the current line
+vim.cmd 'highlight CursorLine guibg=#1C2222'
+
 -- my own key mapping
 vim.keymap.set('n', ',f', ':NvimTreeToggle<CR>')
+vim.keymap.set('n', ',g', '<C-w><C-w>', { desc = 'Move focus to the next available window' })
 vim.keymap.set('n', ',q', ':q!<CR>')
 vim.keymap.set('i', 'jj', '<Esc>')
-vim.keymap.set('i', 'jwj', '<Esc>:w<CR>')
 vim.keymap.set('n', 'tl', ':tabn<CR>')
 vim.keymap.set('n', 'th', ':tabp<CR>')
-vim.keymap.set('n', ',g', '<C-w><C-w>', { desc = 'Move focus to the next available window' })
 vim.keymap.set('n', 'zh', ':tabprevious<CR>', { desc = 'Show the previous tab' })
 vim.keymap.set('n', 'zl', ':tabnext<CR>', { desc = 'Show the next tab' })
 vim.keymap.set('i', 'jj', '<Esc>', { desc = 'Get out of edit mode' })
 vim.keymap.set('i', 'jwj', '<Esc>:w<CR>', { desc = 'Quick save' })
-
-vim.g.copilot_no_tab_map = true
-vim.keymap.set('i', '<S-Tab>', 'copilot#Accept("\\<S-Tab>")', { expr = true, replace_keycodes = false })
 
 -- This will allow nvim to close the tab when you close a buffer but nvim-tree is open
 vim.api.nvim_create_autocmd('BufEnter', {
@@ -113,7 +112,7 @@ return {
           'html',
           'cssls',
           'jinja_lsp',
-          'marksman',
+          'gopls',
         },
         automatic_installation = true,
       }
