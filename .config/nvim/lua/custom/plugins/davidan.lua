@@ -68,10 +68,20 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
   command = [[%s/\s\+$//e]],
 })
 
+-- Fix the copilot window highlight issue
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'copilot',
+  callback = function()
+    vim.wo.winhighlight = 'CursorLine:CursorLine'
+  end,
+})
+
 return {
+  -- GitHub Copilot --
   {
     'github/copilot.vim',
   },
+  -- GitHub Copilot Chat --
   {
     {
       'CopilotC-Nvim/CopilotChat.nvim',
