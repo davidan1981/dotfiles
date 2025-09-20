@@ -10,7 +10,8 @@ vim.opt.textwidth = 120
 vim.opt.wrap = true
 
 -- highlight the current line
-vim.cmd 'highlight CursorLine guibg=#1C2222'
+vim.opt.cursorline = true
+vim.api.nvim_set_hl(0, 'CursorLine', { bg = '#131323' })
 
 -- my own key mapping
 vim.keymap.set('n', ',f', ':NvimTreeToggle<CR>')
