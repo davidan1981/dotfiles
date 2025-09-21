@@ -72,7 +72,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 	command = [[%s/\s\+$//e]],
 })
 
-return {
+local common = {
 	-- GitHub Copilot --
 	{
 		"github/copilot.vim",
@@ -195,3 +195,5 @@ return {
 		end,
 	},
 }
+
+return common
