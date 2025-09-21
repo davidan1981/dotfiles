@@ -69,6 +69,7 @@ alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
 # Kitty
 if [ "${TERM}" = "xterm-kitty" ]; then
+  # The target host must have kitty installed for this to work
   alias kssh="kitty +kitten ssh"
 fi
 

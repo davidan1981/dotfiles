@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source ~/.config/zsh/common.rc
+
+export DA_ENV=personal
